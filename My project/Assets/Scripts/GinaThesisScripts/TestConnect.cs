@@ -47,6 +47,11 @@ public class TestConnect : MonoBehaviour
             Debug.Log("socket.OnReconnectAttempt");
         };
         // ////
+        socket.On("serverMessage", (response) => {
+            Debug.Log("in serverMessage response handler");
+            String res = response.GetValue<String>();
+            Debug.Log(res);
+        });
 
         Debug.Log("Connecting...");
         socket.Connect();

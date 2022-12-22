@@ -22,9 +22,15 @@ def hello(sid, data):
     f = open('./tex.png', 'wb')
     f.write(data)
     f.close()
+    sio.emit('serverMessage', 'hello from desktop')
     # This is for when there will be a model
     # image = ImageFile(io.BytesIO(data), name='tex.png')
 
+@sio.event
+def helloMobile(sid, data):
+    print(sid)
+    print(data)
+    sio.emit('serverMessage', data)
 
 @sio.event
 def disconnect(sid):
