@@ -27,10 +27,35 @@ def hello(sid, data):
     # image = ImageFile(io.BytesIO(data), name='tex.png')
 
 @sio.event
+def helloToRoomDesktop(sid, data):
+    print(sid)
+    print(data)
+    sio.emit('serverMessage', data, room='chat_users0', skip_sid=desktopSid[0])
+
+@sio.event
+def helloToRoomMobile(sid, data):
+    print(sid)
+    print(data)
+    sio.emit('serverMessage', data, room='chat_users0', skip_sid=mobileSid[0])
+
+@sio.event
 def helloMobile(sid, data):
     print(sid)
     print(data)
     sio.emit('serverMessage', data)
+
+desktopSid = []
+mobileSid = []
+@sio.event
+def begin_chat(sid, data):
+    print(data)
+    roomName = 'chat_users' + str(data['roomNo'])
+    print(roomName)
+    if data['type'] == "desktop":
+        desktopSid.append(sid)
+    else:
+        mobileSid.append(sid)
+    sio.enter_room(sid, roomName)
 
 @sio.event
 def disconnect(sid):

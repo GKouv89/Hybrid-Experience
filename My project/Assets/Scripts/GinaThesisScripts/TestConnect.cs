@@ -34,6 +34,8 @@ public class TestConnect : MonoBehaviour
         {
             // Debug.Print("socket.OnConnected");
             Debug.Log("socket.OnConnected");
+            // socket.Emit("begin_chat");
+            socket.EmitStringAsJSON("begin_chat", "{\"roomNo\": 0, \"type\": \"desktop\"}");
         };
         
         socket.OnDisconnected += (sender, e) =>
@@ -58,23 +60,24 @@ public class TestConnect : MonoBehaviour
     }
 
     public void EmitTest(){
-        Texture2D tex = new Texture2D(128, 128);
-        Color[] pixels= tex.GetPixels();
-        Color fillColor = Color.white;
+        // Texture2D tex = new Texture2D(128, 128);
+        // Color[] pixels= tex.GetPixels();
+        // Color fillColor = Color.white;
  
-        for(int i = 0; i < pixels.Length; ++i)
-        {
-            pixels[i] = fillColor;
-        }
+        // for(int i = 0; i < pixels.Length; ++i)
+        // {
+        //     pixels[i] = fillColor;
+        // }
         
-        tex.SetPixels(pixels);
-        tex.Apply();
+        // tex.SetPixels(pixels);
+        // tex.Apply();
 
 
-        byte[] texbytes = tex.EncodeToPNG();
+        // byte[] texbytes = tex.EncodeToPNG();
         
-        // socket.Emit("hello", "hi from desktop");
-        socket.Emit("hello", texbytes);
+        // // socket.Emit("hello", "hi from desktop");
+        // socket.Emit("hello", texbytes);
+        socket.Emit("helloToRoomDesktop", "hi from desktop");
     }
 
     void OnDestroy()
