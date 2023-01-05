@@ -1,9 +1,13 @@
-from django.urls import path
-# from rest_framework.urlpatterns import format_suffix_patterns
+from django.urls import path, include
 from . import views
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'rooms', views.RoomViewSet, basename='room')
 
 urlpatterns = [
-    # path('connect/', views.connect),
-    # path('hello/', views.hello),
-    # path('disconnect/', views.disconnect), 
+    path('players/', views.CreatePlayerViewSet.as_view()),
+    path('players/<str:username>/', views.DestroyPlayerViewSet.as_view()),
 ]
+
+urlpatterns += router.urls
