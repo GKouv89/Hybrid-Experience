@@ -308,7 +308,6 @@ GameObject:
   - component: {fileID: 194374205}
   - component: {fileID: 194374208}
   - component: {fileID: 194374207}
-  - component: {fileID: 194374206}
   - component: {fileID: 194374209}
   m_Layer: 5
   m_Name: My Safe Area
@@ -340,18 +339,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &194374206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 194374204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 980551652d93a1f4c9d7282811064b67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &194374207
 MonoBehaviour:
   m_ObjectHideFlags: 0
