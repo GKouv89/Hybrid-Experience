@@ -13,6 +13,7 @@ public class ScenesManager : MonoBehaviour
 
     public enum Scene
     {
+        UsernameScene,
         LobbyOptions,
         WaitingRoom,
         SampleScene
