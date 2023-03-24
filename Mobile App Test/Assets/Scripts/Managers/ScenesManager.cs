@@ -9,6 +9,7 @@ public class ScenesManager : MonoBehaviour
 
     private void Awake(){
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public enum Scene
