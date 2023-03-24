@@ -8,6 +8,10 @@ public class ScenesManager : MonoBehaviour
     public static ScenesManager Instance;
 
     private void Awake(){
+        if(Instance != null){
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }

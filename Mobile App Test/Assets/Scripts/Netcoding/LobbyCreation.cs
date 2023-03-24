@@ -14,6 +14,8 @@ public class LobbyCreation : MonoBehaviour
     // Start is called before the first frame update
     async void Start()
     {
+        Debug.Log(MainManager.Instance.username);
+
         await UnityServices.InitializeAsync();
 
         AuthenticationService.Instance.SignedIn += () => {
