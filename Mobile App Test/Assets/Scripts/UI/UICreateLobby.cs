@@ -16,7 +16,6 @@ public class UICreateLobby : MonoBehaviour
 
     private void CreateLobby() 
     {
-        GameObject.Find("LobbyBehavior").GetComponent<LobbyCreation>().CreateLobby();
-        ScenesManager.Instance.LoadScene(ScenesManager.Scene.WaitingRoom);
+        LobbyManager.Instance.CreateLobby();
     }
 }

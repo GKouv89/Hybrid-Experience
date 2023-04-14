@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/USS/LobbyInfo.uss?fileID=7433441132597879392&amp;guid=debbb0c142307344eb97d509f1ff086e&amp;type=3#LobbyInfo" />
+    <ui:VisualElement name="mainContainer" style="margin-left: 50px; margin-right: 50px; margin-top: 25px; margin-bottom: 25px; flex-shrink: 0; flex-grow: 1;">
+        <ui:VisualElement name="header" style="background-color: rgb(255, 255, 255);">
+            <ui:Label text="List of Lobbies" display-tooltip-when-elided="true" style="font-size: 48px; -unity-text-align: upper-center;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="lobbyInfoHeader" style="flex-direction: row; background-color: rgb(255, 255, 255); flex-basis: auto; align-items: center; justify-content: space-between; flex-shrink: 0; flex-grow: 0; margin-top: 5px;">
+            <ui:VisualElement name="labelcontainer" class="labelcontainer" style="flex-direction: row; flex-basis: 80%; flex-shrink: 0; justify-content: space-between; font-size: 36px;">
+                <ui:Label text="Lobby Name" display-tooltip-when-elided="true" name="LobbyNameHeader" style="color: rgb(0, 0, 0);" />
+                <ui:Label text="Host " display-tooltip-when-elided="true" name="HostHeader" />
+            </ui:VisualElement>
+            <ui:Button text="Refresh " display-tooltip-when-elided="true" name="refreshButton" style="margin-right: 10px; white-space: nowrap; font-size: 36px;" />
+        </ui:VisualElement>
+        <ui:ListView focusable="true" name="listOfLobbies" style="flex-shrink: 0; flex-grow: 1;" />
+    </ui:VisualElement>
+</ui:UXML>
