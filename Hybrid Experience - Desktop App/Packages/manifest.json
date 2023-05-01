@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.fluffsugarbutton.mymatchmakingsystem": "file:C:/Users/RealityLab-Guest/Desktop/Hybrid Experience/Code/com.fluffsugarbutton.mymatchmakingsystem",
+    "com.fluffsugarbutton.mymatchmakingsystem": "file:C:/Users/RealityLab-Guest/Desktop/Hybrid Experience/Hybrid Experience/com.fluffsugarbutton.mymatchmakingsystem",
     "com.itisnajim.socketiounity": "https://github.com/itisnajim/SocketIOUnity.git",
     "com.unity.cinemachine": "2.8.9",
     "com.unity.collab-proxy": "2.0.0",

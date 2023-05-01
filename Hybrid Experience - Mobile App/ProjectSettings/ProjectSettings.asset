@@ -721,11 +721,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 
+  cloudProjectId: ad4fdc3c-c7b9-4c3d-aae1-4fef10fddf47
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: Hybrid Experience
+  organizationId: fluffsugarbutton
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
