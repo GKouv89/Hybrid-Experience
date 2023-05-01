@@ -38,8 +38,8 @@
   <ItemGroup>
      <Compile Include="Assets\Photon\PhotonRealtime\Demos\DemoLoadBalancing\ConnectAndJoinRandomLb.cs" />
      <Compile Include="Assets\BNG Framework\Scripts\Core\GrabbableChild.cs" />
-     <Compile Include="Assets\BNG Framework\Scripts\Core\TrackedDevice.cs" />
      <Compile Include="Assets\BNG Framework\Scripts\Core\SnapZoneScale.cs" />
+     <Compile Include="Assets\BNG Framework\Scripts\Core\TrackedDevice.cs" />
      <Compile Include="Assets\Scripts\Timeline\TimelinePeriod.cs" />
      <Compile Include="Assets\BNG Framework\Scripts\Components\ScreenFader.cs" />
      <Compile Include="Assets\Photon\PhotonLibs\WebSocket\SocketWebTcp.cs" />
@@ -132,6 +132,7 @@
      <Compile Include="Assets\BNG Framework\Scripts\Extras\MovingPlatform.cs" />
      <Compile Include="Assets\MKGlowFree\MKGlowFree.cs" />
      <Compile Include="Assets\BNG Framework\Scripts\Extras\BowArm.cs" />
+     <Compile Include="Assets\CrystalFramework\Utility\SafeArea.cs" />
      <Compile Include="Assets\BNG Framework\Scripts\Utility\FixNonUniformScale.cs" />
      <Compile Include="Assets\BNG Framework\Scripts\Extras\ExtensionMethods.cs" />
      <Compile Include="Assets\GameVoiceControl\Scripts\Test\GetAvailableMicrophones.cs" />
@@ -171,7 +172,9 @@
      <Compile Include="Assets\BNG Framework\Scripts\Helpers\GrabberArea.cs" />
      <Compile Include="Assets\Scripts\SceneManagement\NotUsed\SpawnPointVisual.cs" />
      <Compile Include="Assets\BNG Framework\Scripts\Core\Grabber.cs" />
+     <Compile Include="Assets\CrystalFramework\Utility\Demos\SafeAreaDemo.cs" />
      <Compile Include="Assets\BNG Framework\Scripts\Extras\Zipline.cs" />
+     <Compile Include="Assets\TurnOnCamera.cs" />
      <Compile Include="Assets\Scripts\AudioVideo\GrabSeat.cs" />
      <Compile Include="Assets\BNG Framework\Scripts\Extras\Bow.cs" />
      <Compile Include="Assets\BNG Framework\Integrations\Invector\ReceiveInvectorDamage.cs" />
@@ -191,6 +194,7 @@
      <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\IgnoreUiRaycastWhenInactive.cs" />
      <Compile Include="Assets\BNG Framework\Scripts\Extras\HandJet.cs" />
      <Compile Include="Assets\GameVoiceControl\Scripts\GameVoiceControl.cs" />
+     <Compile Include="Assets\Scripts\TestSocketConnection.cs" />
      <Compile Include="Assets\BNG Framework\HandPoser\Scripts\EditorHandle.cs" />
      <Compile Include="Assets\BNG Framework\HandPoser\Scripts\AutoPoser.cs" />
      <Compile Include="Assets\Scripts\Computors\Computor.cs" />
@@ -307,6 +311,7 @@
      <None Include="Assets\BNG Framework\Models\models.txt" />
      <None Include="Assets\DeepSpaceSkyboxPack\GalacticGreen\Galactic Green Skybox Readme.txt" />
      <None Include="Assets\BNG Framework\Sounds\license.txt" />
+     <None Include="Assets\CrystalFramework\Utility\Demos\SafeAreaDemo.txt" />
      <None Include="Assets\BNG Framework\Integrations\SteamVR\Readme.txt" />
      <None Include="Assets\BNG Framework\Resources\OutlineEffect\Resources\OutlineShader.shader" />
      <None Include="Assets\MKGlowFree\Shader\Variants_SelectiveMode\Normal\MK_Normal-DiffuseBumpSpec.shader" />
@@ -317,6 +322,7 @@
      <None Include="Assets\BNG Framework\Models\Hands\OculusHands\LICENSE.txt" />
      <None Include="Assets\StarterAssets\Environment\Shaders\Built-in_RP\ArmatureShader.shader" />
      <None Include="Assets\Photon\PhotonLibs\Photon3Unity3D.xml" />
+     <None Include="Assets\Fonts\OFL.txt" />
      <None Include="Assets\BNG Framework\LICENSE.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
@@ -983,14 +989,14 @@
     <Reference Include="Unity.TextMeshPro.Editor">
         <HintPath>C:\Users\RealityLab-Guest\Desktop\Hybrid Experience\Code\My project\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualStudio.Editor">
-        <HintPath>C:\Users\RealityLab-Guest\Desktop\Hybrid Experience\Code\My project\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Performance.Profile-Analyzer.Editor">
         <HintPath>C:\Users\RealityLab-Guest\Desktop\Hybrid Experience\Code\My project\Library\ScriptAssemblies\Unity.Performance.Profile-Analyzer.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
         <HintPath>C:\Users\RealityLab-Guest\Desktop\Hybrid Experience\Code\My project\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualStudio.Editor">
+        <HintPath>C:\Users\RealityLab-Guest\Desktop\Hybrid Experience\Code\My project\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
         <HintPath>C:\Users\RealityLab-Guest\Desktop\Hybrid Experience\Code\My project\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
@@ -1028,20 +1034,32 @@
     <Reference Include="Unity.PlasticSCM.Editor">
         <HintPath>C:\Users\RealityLab-Guest\Desktop\Hybrid Experience\Code\My project\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Core">
-        <HintPath>C:\Users\RealityLab-Guest\Desktop\Hybrid Experience\Code\My project\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
+    <Reference Include="Unity.Services.Core">
+        <HintPath>C:\Users\RealityLab-Guest\Desktop\Hybrid Experience\Code\My project\Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
     </Reference>
     <Reference Include="Unity.EditorCoroutines.Editor">
         <HintPath>C:\Users\RealityLab-Guest\Desktop\Hybrid Experience\Code\My project\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.VisualScripting.Core">
+        <HintPath>C:\Users\RealityLab-Guest\Desktop\Hybrid Experience\Code\My project\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Services.Authentication">
+        <HintPath>C:\Users\RealityLab-Guest\Desktop\Hybrid Experience\Code\My project\Library\ScriptAssemblies\Unity.Services.Authentication.dll</HintPath>
+    </Reference>
     <Reference Include="Cinemachine">
         <HintPath>C:\Users\RealityLab-Guest\Desktop\Hybrid Experience\Code\My project\Library\ScriptAssemblies\Cinemachine.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Services.Core.Analytics">
+        <HintPath>C:\Users\RealityLab-Guest\Desktop\Hybrid Experience\Code\My project\Library\ScriptAssemblies\Unity.Services.Core.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.cinemachine.editor">
         <HintPath>C:\Users\RealityLab-Guest\Desktop\Hybrid Experience\Code\My project\Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Shared.Editor">
         <HintPath>C:\Users\RealityLab-Guest\Desktop\Hybrid Experience\Code\My project\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Services.Core.Environments">
+        <HintPath>C:\Users\RealityLab-Guest\Desktop\Hybrid Experience\Code\My project\Library\ScriptAssemblies\Unity.Services.Core.Environments.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
         <HintPath>C:\Users\RealityLab-Guest\Desktop\Hybrid Experience\Code\My project\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
@@ -1054,6 +1072,9 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
         <HintPath>C:\Users\RealityLab-Guest\Desktop\Hybrid Experience\Code\My project\Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Services.Lobbies">
+        <HintPath>C:\Users\RealityLab-Guest\Desktop\Hybrid Experience\Code\My project\Library\ScriptAssemblies\Unity.Services.Lobbies.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

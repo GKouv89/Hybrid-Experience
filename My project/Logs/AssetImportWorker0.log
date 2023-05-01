@@ -1,0 +1,255 @@
+Using pre-set license
+Built from '2021.3/staging' branch; Version is '2021.3.19f1 (c9714fde33b6) revision 13201743'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19044) 64bit Core' Language: 'en' Physical Memory: 16204 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.3.19f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+C:/Users/RealityLab-Guest/Desktop/Hybrid Experience/Code/My project
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+50672
+Successfully changed project path to: C:/Users/RealityLab-Guest/Desktop/Hybrid Experience/Code/My project
+C:/Users/RealityLab-Guest/Desktop/Hybrid Experience/Code/My project
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [18964] Host "[IP] 192.168.1.4 [Port] 0 [Flags] 2 [Guid] 1181381650 [EditorId] 1181381650 [Version] 1048832 [Id] WindowsEditor(7,MSI) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [18964] Host "[IP] 192.168.1.4 [Port] 0 [Flags] 2 [Guid] 1181381650 [EditorId] 1181381650 [Version] 1048832 [Id] WindowsEditor(7,MSI) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+Refreshing native plugins compatible for Editor in 120.18 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.3.19f1 (c9714fde33b6)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.19f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/RealityLab-Guest/Desktop/Hybrid Experience/Code/My project/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 2070 (ID=0x1f14)
+    Vendor:   NVIDIA
+    VRAM:     8019 MB
+    Driver:   31.0.15.2849
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.19f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.19f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.19f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56476
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.19f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.19f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.007739 seconds.
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Android Extension - Scanning For ADB Devices 261 ms
+Refreshing native plugins compatible for Editor in 124.52 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.994 seconds
+Domain Reload Profiling:
+	ReloadAssembly (995ms)
+		BeginReloadAssembly (66ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (812ms)
+			LoadAssemblies (64ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (113ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (29ms)
+			SetupLoadedEditorAssemblies (621ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (357ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (125ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (93ms)
+				ProcessInitializeOnLoadMethodAttributes (45ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.012807 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\RealityLab-Guest\Desktop\Hybrid Experience\Code\My project\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\RealityLab-Guest\Desktop\Hybrid Experience\Code\My project\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 128.44 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.601 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1601ms)
+		BeginReloadAssembly (109ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (19ms)
+		EndReloadAssembly (1363ms)
+			LoadAssemblies (200ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (357ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (76ms)
+			SetupLoadedEditorAssemblies (662ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (16ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (129ms)
+				BeforeProcessingInitializeOnLoad (157ms)
+				ProcessInitializeOnLoadAttributes (309ms)
+				ProcessInitializeOnLoadMethodAttributes (42ms)
+				AfterProcessingInitializeOnLoad (9ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
+Refreshing native plugins compatible for Editor in 2.18 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4513 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 66 unused Assets / (353.0 KB). Loaded Objects now: 4969.
+Memory consumption went from 172.0 MB to 171.6 MB.
+Total: 5.288900 ms (FindLiveObjects: 0.426800 ms CreateObjectMapping: 0.571200 ms MarkObjects: 3.974300 ms  DeleteObjects: 0.315200 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 590397.041602 seconds.
+  path: Assets/UI Toolkit/PanelSettings.asset
+  artifactKey: Guid(a0e8d4399b51c7542970cc570f6115bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI Toolkit/PanelSettings.asset using Guid(a0e8d4399b51c7542970cc570f6115bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '29d91df2b773d0d4f7fc162ad56a5df6') in 0.070940 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Scripts/SceneManagement/NotUsed/SpawningSO-Section5.asset
+  artifactKey: Guid(9dc1425d03f36c545b679dba00233b90) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/SceneManagement/NotUsed/SpawningSO-Section5.asset using Guid(9dc1425d03f36c545b679dba00233b90) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '568fec1c094ddb58d85726aa75bf5dfd') in 0.013391 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Scripts/SceneManagement/NotUsed/SpawningSO-Section1.asset
+  artifactKey: Guid(105218f057664e34d94c992093de3ff0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/SceneManagement/NotUsed/SpawningSO-Section1.asset using Guid(105218f057664e34d94c992093de3ff0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8bed01932a5a20cd619225bd9ebe6c32') in 0.013294 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.598959 seconds.
+  path: Assets/Textures/AITHOUSA I_b_part2.jpg
+  artifactKey: Guid(04d5243784fe67948bf64ea28e4ed06b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/AITHOUSA I_b_part2.jpg using Guid(04d5243784fe67948bf64ea28e4ed06b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '187581fb4d0f66c79bc5c477011d5323') in 0.046804 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Textures/TextureImporterQuestPreset.preset
+  artifactKey: Guid(423ed56813395af43acccd959a4a231b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/TextureImporterQuestPreset.preset using Guid(423ed56813395af43acccd959a4a231b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '75a7b65043aa4939e7e1c34aa11c2f38') in 0.016359 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Textures/Dark-Wood-Seamless-Background-Texture-20-copy.jpg
+  artifactKey: Guid(4797d9998e2fe4f4eb44a5823b4257c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Dark-Wood-Seamless-Background-Texture-20-copy.jpg using Guid(4797d9998e2fe4f4eb44a5823b4257c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2506d210f93cf88807324d7c7bedc317') in 0.021631 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Textures/drys.jpg
+  artifactKey: Guid(3499712adaa6aa746ba40f5ca9e48e69) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/drys.jpg using Guid(3499712adaa6aa746ba40f5ca9e48e69) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b5d2c5a6271b5fe7e3199b25b85df3c3') in 0.024068 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Textures/X1.1.jpg
+  artifactKey: Guid(2f1829681da17864f83104ae617d539a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/X1.1.jpg using Guid(2f1829681da17864f83104ae617d539a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c7b1006b6672253c008b1b745041a184') in 0.016536 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.819453 seconds.
+  path: Assets/UI/UXML/LobbyListView.uxml
+  artifactKey: Guid(b796db57ab4802f4e967f8127cce19d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UI/UXML/LobbyListView.uxml using Guid(b796db57ab4802f4e967f8127cce19d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9c798f2f547c79a9f3d6d2625fd0720b') in 0.019056 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 21.567716 seconds.
+  path: Assets/Fonts/AlfaSlabOne-Regular.ttf
+  artifactKey: Guid(dca4a925dc2250b4fa25f16551be28b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/AlfaSlabOne-Regular.ttf using Guid(dca4a925dc2250b4fa25f16551be28b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aa0d2e90529ddce018959dc92e506fd7') in 0.076911 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Fonts/Raleway-Medium SDF.asset
+  artifactKey: Guid(4aaaeb9e50018394a8811c7e7eac8712) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/Raleway-Medium SDF.asset using Guid(4aaaeb9e50018394a8811c7e7eac8712) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cfaf6070af9de5c1aa11302ea53b6f5b') in 0.130715 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Fonts/Felipa-Regular.ttf
+  artifactKey: Guid(a6110ddb390eff0418196d70613777cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/Felipa-Regular.ttf using Guid(a6110ddb390eff0418196d70613777cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '41d2eac9fa4367c90c3c96f82e2a738f') in 0.029267 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Fonts/FjallaOne-Regular.ttf
+  artifactKey: Guid(06cf254591f1494438c67419d88ab904) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/FjallaOne-Regular.ttf using Guid(06cf254591f1494438c67419d88ab904) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '93f6da52d622fdbbb19820fa06d3de50') in 0.031040 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Fonts/BebasNeue-Regular SDF.asset
+  artifactKey: Guid(f9b111defd6d7a14cb1eb941a6b7defe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Fonts/BebasNeue-Regular SDF.asset using Guid(f9b111defd6d7a14cb1eb941a6b7defe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '54ab35e012c880b6490e470773f901f6') in 0.038383 seconds 
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0

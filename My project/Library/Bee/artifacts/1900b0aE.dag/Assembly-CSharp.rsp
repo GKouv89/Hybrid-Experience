@@ -352,6 +352,11 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Performance.Profile-Analyzer.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.PlasticSCM.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Rider.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Authentication.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Core.Analytics.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Core.Environments.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Core.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Services.Lobbies.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.TestTools.CodeCoverage.Editor.ref.dll"
@@ -517,6 +522,8 @@
 "Assets/BNG Framework/Scripts/Weapons/Projectile.cs"
 "Assets/BNG Framework/Scripts/Weapons/RaycastWeapon.cs"
 "Assets/BNG Framework/Scripts/Weapons/WeaponSlide.cs"
+"Assets/CrystalFramework/Utility/Demos/SafeAreaDemo.cs"
+"Assets/CrystalFramework/Utility/SafeArea.cs"
 "Assets/GameVoiceControl/Scripts/GameVoiceControl.cs"
 "Assets/GameVoiceControl/Scripts/Test/Controller.cs"
 "Assets/GameVoiceControl/Scripts/Test/GetAvailableMicrophones.cs"
@@ -559,6 +566,7 @@
 "Assets/Scripts/SceneManagement/Portal.cs"
 "Assets/Scripts/SceneManagement/PortalManager.cs"
 "Assets/Scripts/SceneManagement/TestSceneLoading.cs"
+"Assets/Scripts/TestSocketConnection.cs"
 "Assets/Scripts/Timeline/TimelineCanvas.cs"
 "Assets/Scripts/Timeline/TimelinePeriod.cs"
 "Assets/Scripts/Timeline/TimelinePeriodSO.cs"
@@ -579,6 +587,7 @@
 "Assets/StarterAssets/ThirdPersonController/Scripts/BasicRigidBodyPush.cs"
 "Assets/StarterAssets/ThirdPersonController/Scripts/ThirdPersonController.cs"
 "Assets/StarterAssets/TutorialInfo/Scripts/Readme.cs"
+"Assets/TurnOnCamera.cs"
 -langversion:9.0
 
 /deterministic
