@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/USS/LobbyInfo.uss?fileID=7433441132597879392&amp;guid=debbb0c142307344eb97d509f1ff086e&amp;type=3#LobbyInfo" />
+    <ui:VisualElement name="lobbyInfo" style="flex-direction: row; background-color: rgb(255, 255, 255); flex-basis: auto; align-items: center; justify-content: space-between; flex-shrink: 0; flex-grow: 0; margin-top: 5px;">
+        <ui:VisualElement name="labelcontainer" class="labelcontainer" style="flex-direction: row; flex-basis: 80%; flex-shrink: 0; justify-content: space-between; font-size: 36px;">
+            <ui:Label text="Lobby Name" display-tooltip-when-elided="true" name="LobbyName" style="color: rgb(0, 0, 0);" />
+            <ui:Label text="Host " display-tooltip-when-elided="true" name="Host" />
+        </ui:VisualElement>
+        <ui:Button text="Join" display-tooltip-when-elided="true" name="joinButton" style="margin-right: 10px; font-size: 36px;" />
+    </ui:VisualElement>
+</ui:UXML>

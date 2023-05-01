@@ -1,0 +1,13 @@
+{
+    "name": "com.fluffsugarbutton.mymatchmakingsystem",
+    "version": "0.0.1",
+    "displayName": "Lobby Example",
+    "unity": "2021.3",
+    "dependencies": {
+      "com.unity.services.lobby": "1.0.3",
+      "com.unity.textmeshpro": "3.0.6"
+    },
+    "author": {
+      "name": "FluffSugarButton"
+    }
+}
