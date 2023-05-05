@@ -51,6 +51,7 @@ public class LobbyMembers : MonoBehaviour
         statusButton.onClick.AddListener(changePlayerStatus);
         LobbyManager.Instance.OnLobbyChange += updateMembers;
 
+        startGameButton.onClick.AddListener(startGame);
         startGameButton.interactable = false;
     }
 
@@ -81,5 +82,16 @@ public class LobbyMembers : MonoBehaviour
 
     private void changePlayerStatus(){
         LobbyManager.Instance.UpdatePlayerStatus();
+    }
+
+    private void startGame()
+    {
+        ScenesManager.Scene gameScene; 
+        #if UNITY_STANDALONE_WIN
+            gameScene = ScenesManager.Scene.DIMuseumVR;
+        #elif UNITY_ANDROID
+            gameScene = ScenesManager.Scene.SampleScene;
+        #endif
+        ScenesManager.Instance.LoadScene(gameScene);
     }
 }

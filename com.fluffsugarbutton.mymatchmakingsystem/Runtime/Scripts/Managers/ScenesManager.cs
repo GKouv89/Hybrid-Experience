@@ -21,7 +21,11 @@ public class ScenesManager : MonoBehaviour
         UsernameScene,
         LobbyOptions,
         WaitingRoom,
-        SampleScene
+        #if UNITY_ANDROID
+            SampleScene,
+        #elif UNITY_STANDALONE_WIN
+            DIMuseumVR,
+        #endif
     }
 
     public void LoadScene(Scene scene)

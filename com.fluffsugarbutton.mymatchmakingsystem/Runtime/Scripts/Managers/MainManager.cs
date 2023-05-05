@@ -1,10 +1,13 @@
 using UnityEngine;
+using System.Diagnostics;
+using Debug = UnityEngine.Debug;
 
 public class MainManager : MonoBehaviour
 {
     public static MainManager Instance; 
     public string username;
-    public static string deviceType = "mobile";
+    public static string deviceType;
+
     // public string playerId;    
     private void Awake()
     {
@@ -15,6 +18,17 @@ public class MainManager : MonoBehaviour
         }
 
         Instance = this;
+        setDeviceType();
+        Debug.Log(deviceType);
+
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void setDeviceType(){
+        #if UNITY_ANDROID
+            deviceType = "mobile";
+        #elif UNITY_STANDALONE_WIN
+            deviceType = "desktop";
+        #endif
     }
 }
