@@ -1,4 +1,28 @@
-.unity-label { 
-    color: black; 
-    margin: 0% 5%;
+.unity-label {
+    color: black;
+    margin: 0 5%;
+}
+
+.lobby-info-row {
+    flex-direction: row;
+    flex-basis: auto;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    flex-grow: 0;
+    margin-top: 5px;
+}
+
+.label-container {
+    flex-direction: row;
+    flex-basis: 80%;
+    flex-shrink: 0;
+    justify-content: space-between;
+    font-size: 36px;
+}
+
+.lobby-button {
+    margin-right: 10px;
+    white-space: nowrap;
+    font-size: 36px;
 }
