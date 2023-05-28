@@ -20,6 +20,7 @@ public class ScenesManager : MonoBehaviour
     {
         UsernameScene,
         LobbyOptions,
+        LobbyList,
         WaitingRoom,
         #if UNITY_ANDROID
             SampleScene,

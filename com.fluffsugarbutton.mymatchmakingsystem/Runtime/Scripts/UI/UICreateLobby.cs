@@ -23,6 +23,6 @@ public class UICreateLobby : MonoBehaviour
 
     private void SearchForLobby()
     {
-        LobbyManager.Instance.SearchForLobbies();
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.LobbyList);
     }
 }

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Unity.Services.Core;
+using Unity.Services.Lobbies;
+using Unity.Services.Lobbies.Models;
 
 public class LobbyListEntryController
 {
@@ -20,9 +23,9 @@ public class LobbyListEntryController
     // This function receives the lobby whose info this list 
     // element displays. 
 
-    public void SetLobbyInfoData(LobbyListData lobbyInfoData)
+    public void SetLobbyInfoData(Lobby lobbyInfoData)
     {
-        lobbyNameLabel.text = lobbyInfoData.lobbyName;
-        hostUsernameLabel.text = lobbyInfoData.hostUsername;
+        lobbyNameLabel.text = lobbyInfoData.Name;
+        hostUsernameLabel.text = lobbyInfoData.Players[0].Data["playerName"].Value.ToString();
     }
 }

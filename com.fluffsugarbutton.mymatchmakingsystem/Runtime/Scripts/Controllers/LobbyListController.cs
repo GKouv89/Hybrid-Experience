@@ -1,7 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Unity.Services.Core;
+using Unity.Services.Lobbies;
+using Unity.Services.Lobbies.Models;
 
 public class LobbyListController
 {
@@ -11,9 +15,9 @@ public class LobbyListController
     // UI element references
     ListView LobbyList;
 
-    public void InitializeLobbyList(VisualElement root, VisualTreeAsset listElementTemplate)
+    public async void InitializeLobbyList(VisualElement root, VisualTreeAsset listElementTemplate)
     {
-        EnumerateAllLobbies();
+        await EnumerateAllLobbies();
 
         // Store a reference to the template for the list entries
         lobbyListEntryTemplate = listElementTemplate;
@@ -24,12 +28,11 @@ public class LobbyListController
         FillLobbyList();
     }
 
-    List<LobbyListData> AllLobbies;
+    List<Lobby> AllLobbies;
 
-    void EnumerateAllLobbies()
+    async Task EnumerateAllLobbies()
     {
-        AllLobbies = new List<LobbyListData>();
-        AllLobbies.AddRange(Resources.LoadAll<LobbyListData>("Lobbies"));
+        AllLobbies = await LobbyManager.Instance.SearchForLobbies();
     }
 
     void FillLobbyList()

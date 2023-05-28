@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
@@ -156,7 +157,8 @@ public class LobbyManager : MonoBehaviour
         HandleLobbyPollForUpdates();
     }
 
-    public async void SearchForLobbies() {
+    public async Task<List<Lobby>> SearchForLobbies() {
+        List<Lobby> result = new List<Lobby>();
         try {
             QueryLobbiesOptions options = new QueryLobbiesOptions();
             options.Count = 25;
@@ -176,16 +178,18 @@ public class LobbyManager : MonoBehaviour
             };
 
             QueryResponse queryResponse = await Lobbies.Instance.QueryLobbiesAsync(options);
-
             Debug.Log("Lobbies found: " + queryResponse.Results.Count);
+            
             foreach (Lobby lobby in queryResponse.Results){
                 foreach(Player player in lobby.Players)
                 {
                     Debug.Log(lobby.Name + " " + player.Data["playerName"].Value.ToString() + " " + lobby.Data["HostGameMode"].Value.ToString() + " " + MainManager.deviceType);
                 }
+                result.Add(lobby);
             }
         } catch (LobbyServiceException e) {
             Debug.Log(e);
         }
+        return result;
     }
 }
