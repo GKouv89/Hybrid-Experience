@@ -61,10 +61,19 @@ public class LobbyManager : MonoBehaviour
                 Player = GetPlayer()
             };
             player = createLobbyOptions.Player;
+            createLobbyOptions.Data = new Dictionary<string, DataObject>()
+            {
+                {
+                    "HostGameMode", new DataObject(
+                        visibility: DataObject.VisibilityOptions.Public, // Visible publicly.
+                        value: MainManager.deviceType,
+                        index: DataObject.IndexOptions.S1)
+                },
+            };
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName.text, maxPlayers, createLobbyOptions);
             createdLobby = lobby;
             
-            Debug.Log("Created Lobby! " + lobby.Name + " " + lobby.MaxPlayers);
+            Debug.Log("Created Lobby! " + lobby.Name + " " + lobby.MaxPlayers + " " + lobby.Data["HostGameMode"].Value);
             ScenesManager.Instance.LoadScene(ScenesManager.Scene.WaitingRoom);
         }catch (LobbyServiceException e){
             Debug.Log(e);
@@ -147,22 +156,36 @@ public class LobbyManager : MonoBehaviour
         HandleLobbyPollForUpdates();
     }
 
-    // [UnityEditor.Callbacks.DidReloadScripts]
-    // private static void OnScriptsReloaded()
-    // {
-    //     Debug.Log("Hi.");
-    // }
+    public async void SearchForLobbies() {
+        try {
+            QueryLobbiesOptions options = new QueryLobbiesOptions();
+            options.Count = 25;
 
-    // public async void ListLobbies() {
-    //     try {
-    //         QueryResponse queryResponse = await Lobbies.Instance.QueryLobbiesAsync();
+            options.Filters = new List<QueryFilter>
+            {
+                new QueryFilter(
+                    field: QueryFilter.FieldOptions.S1,
+                    op: QueryFilter.OpOptions.NE,
+                    value: MainManager.deviceType
+                ),
+                new QueryFilter(
+                    field: QueryFilter.FieldOptions.AvailableSlots,
+                    op: QueryFilter.OpOptions.EQ,
+                    value: "1"
+                )                
+            };
 
-    //         Debug.Log("Lobbies found: " + queryResponse.Results.Count);
-    //         foreach (Lobby lobby in queryResponse.Results){
-    //             Debug.Log(lobby.Name + " " + lobby.MaxPlayers);
-    //         }
-    //     } catch (LobbyServiceException e) {
-    //         Debug.Log(e);
-    //     }
-    // }
+            QueryResponse queryResponse = await Lobbies.Instance.QueryLobbiesAsync(options);
+
+            Debug.Log("Lobbies found: " + queryResponse.Results.Count);
+            foreach (Lobby lobby in queryResponse.Results){
+                foreach(Player player in lobby.Players)
+                {
+                    Debug.Log(lobby.Name + " " + player.Data["playerName"].Value.ToString() + " " + lobby.Data["HostGameMode"].Value.ToString() + " " + MainManager.deviceType);
+                }
+            }
+        } catch (LobbyServiceException e) {
+            Debug.Log(e);
+        }
+    }
 }
