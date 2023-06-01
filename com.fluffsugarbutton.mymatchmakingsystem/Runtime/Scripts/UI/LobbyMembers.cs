@@ -43,7 +43,7 @@ public class LobbyMembers : MonoBehaviour
     {
         members = new List<LobbyMemberDisplay>();
         LobbyMemberDisplay header = createHeader(parent);
-        List<Player> players = LobbyManager.Instance.CreatedLobby.Players;
+        List<Player> players = LobbyManager.Instance.MyLobby.Players;
         for (int i = 0; i < players.Count; i++){
             members.Add(createMember(players[i], parent));
         }
@@ -57,8 +57,25 @@ public class LobbyMembers : MonoBehaviour
 
     private void updateMembers()
     {
-        List<Player> players = LobbyManager.Instance.CreatedLobby.Players;
-        // Update code
+        List<Player> players = LobbyManager.Instance.MyLobby.Players;
+        foreach ( Player player in players){
+            Debug.Log("Player name: " + player.Data["playerName"].Value.ToString());
+        }
+
+        // Case no. 1: new member was added
+        if(players.Count != members.Count)
+        {
+            foreach(Player player in players)
+            {
+                if(!members.Exists(x => x.username.text == player.Data["playerName"].Value))
+                {
+                    // Create new member UI
+                    members.Add(createMember(player, parent));
+                }
+            }
+        }
+
+        // Case no. 2: Some player data has changed (readiness level)
         bool allPlayersReady = true;
         LobbyMemberDisplay member;
         for(int i = 0; i < players.Count; i++){

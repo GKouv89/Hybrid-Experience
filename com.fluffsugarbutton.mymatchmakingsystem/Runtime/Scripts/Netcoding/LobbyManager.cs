@@ -12,13 +12,14 @@ public class LobbyManager : MonoBehaviour
 {
     public static LobbyManager Instance; 
     public TMP_InputField lobbyName;
-    private Lobby createdLobby;
-    public Lobby CreatedLobby
+    private bool isHost = false;
+    private Lobby myLobby;
+    public Lobby MyLobby
     {
-        get { return createdLobby; }
+        get { return myLobby; }
         set 
         {
-            createdLobby = value;
+            myLobby = value;
             if(OnLobbyChange != null){ OnLobbyChange(); }
         }
     }
@@ -71,14 +72,28 @@ public class LobbyManager : MonoBehaviour
                         index: DataObject.IndexOptions.S1)
                 },
             };
+            isHost = true;
+
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName.text, maxPlayers, createLobbyOptions);
-            createdLobby = lobby;
-            
+            myLobby = lobby;
+            // LobbyService.Instance.SubscribeToLobbyEventsAsync(lobbyId, callback);
+
             Debug.Log("Created Lobby! " + lobby.Name + " " + lobby.MaxPlayers + " " + lobby.Data["HostGameMode"].Value);
             ScenesManager.Instance.LoadScene(ScenesManager.Scene.WaitingRoom);
         }catch (LobbyServiceException e){
             Debug.Log(e);
         }
+    }
+
+    public async void JoinLobby(string lobbyId){
+        JoinLobbyByIdOptions options = new JoinLobbyByIdOptions
+        {
+            Player = GetPlayer()
+        };
+        player = options.Player; 
+        Lobby lobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobbyId, options);
+        myLobby = lobby;
+        ScenesManager.Instance.LoadScene(ScenesManager.Scene.WaitingRoom);
     }
 
     private Player GetPlayer(){
@@ -116,7 +131,7 @@ public class LobbyManager : MonoBehaviour
 
             string playerId = AuthenticationService.Instance.PlayerId;
 
-            createdLobby = await LobbyService.Instance.UpdatePlayerAsync(createdLobby.Id, playerId, options);
+            myLobby = await LobbyService.Instance.UpdatePlayerAsync(myLobby.Id, playerId, options);
         }
         catch (LobbyServiceException e)
         {
@@ -125,7 +140,7 @@ public class LobbyManager : MonoBehaviour
     }
 
     private async void HandleLobbyPollForUpdates() {
-        if(CreatedLobby != null)
+        if(MyLobby != null)
         {
             lobbyUpdateTimer -= Time.deltaTime;
             if(lobbyUpdateTimer < 0f)
@@ -133,21 +148,21 @@ public class LobbyManager : MonoBehaviour
                 float lobbyUpdateTimerMax = 1.1f;
                 lobbyUpdateTimer = lobbyUpdateTimerMax;
 
-                Lobby lobby = await LobbyService.Instance.GetLobbyAsync(createdLobby.Id);
-                CreatedLobby = lobby;
+                Lobby lobby = await LobbyService.Instance.GetLobbyAsync(myLobby.Id);
+                MyLobby = lobby;
             }
         }
     }
 
     private async void HandleLobbyHeartbeat(){
-        if(createdLobby != null)
+        if(myLobby != null && isHost)
         {
             heartbeatTimer -= Time.deltaTime;
             if(heartbeatTimer < 0f)
             {
                 float heartbeatTimerMax = 15;
                 heartbeatTimer = heartbeatTimerMax;
-                await LobbyService.Instance.SendHeartbeatPingAsync(createdLobby.Id);
+                await LobbyService.Instance.SendHeartbeatPingAsync(myLobby.Id);
             }
         }
     }
