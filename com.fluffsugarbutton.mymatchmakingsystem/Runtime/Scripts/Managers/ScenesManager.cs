@@ -34,6 +34,18 @@ public class ScenesManager : MonoBehaviour
         SceneManager.LoadScene(scene.ToString());
     }
 
+    public void startGame()
+    {
+        ScenesManager.Scene gameScene; 
+        #if UNITY_STANDALONE_WIN
+            gameScene = ScenesManager.Scene.DIMuseumVR;
+        #elif UNITY_ANDROID
+            gameScene = ScenesManager.Scene.SampleScene;
+        #endif
+        ScenesManager.Instance.LoadScene(gameScene);
+    }
+
+
     // public void LoadNextScene()
     // {
     //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

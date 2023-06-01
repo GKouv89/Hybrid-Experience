@@ -7,7 +7,7 @@ public class MainManager : MonoBehaviour
     public static MainManager Instance; 
     public string username;
     public static string deviceType;
-
+    // public bool hasGameStarted = false;
     // public string playerId;    
     private void Awake()
     {

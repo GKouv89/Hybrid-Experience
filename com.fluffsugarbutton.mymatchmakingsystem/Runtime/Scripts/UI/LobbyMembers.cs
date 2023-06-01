@@ -14,7 +14,7 @@ public class LobbyMembers : MonoBehaviour
     private List<LobbyMemberDisplay> members;
     public Button statusButton;
     public Button startGameButton;
-    
+
     private LobbyMemberDisplay createMember(Player player, Transform parent){
         LobbyMemberDisplay member;
         member = Instantiate(prefab, parent);
@@ -51,16 +51,13 @@ public class LobbyMembers : MonoBehaviour
         statusButton.onClick.AddListener(changePlayerStatus);
         LobbyManager.Instance.OnLobbyChange += updateMembers;
 
-        startGameButton.onClick.AddListener(startGame);
+        startGameButton.onClick.AddListener(LobbyManager.Instance.UpdateGameStatus);
         startGameButton.interactable = false;
     }
 
     private void updateMembers()
     {
         List<Player> players = LobbyManager.Instance.MyLobby.Players;
-        foreach ( Player player in players){
-            Debug.Log("Player name: " + player.Data["playerName"].Value.ToString());
-        }
 
         // Case no. 1: new member was added
         if(players.Count != members.Count)
@@ -75,7 +72,7 @@ public class LobbyMembers : MonoBehaviour
             }
         }
 
-        // Case no. 2: Some player data has changed (readiness level)
+        // Case no. 2: A player's readiness level has changed
         bool allPlayersReady = true;
         LobbyMemberDisplay member;
         for(int i = 0; i < players.Count; i++){
@@ -93,22 +90,14 @@ public class LobbyMembers : MonoBehaviour
             statusButton.GetComponentInChildren<TMP_Text>().text = "Ready";
             return;
         }
-        startGameButton.interactable = true;
+        if(LobbyManager.Instance.isHost)
+        {
+            startGameButton.interactable = true;
+        }
         statusButton.GetComponentInChildren<TMP_Text>().text = "Not Ready";
     }
 
     private void changePlayerStatus(){
         LobbyManager.Instance.UpdatePlayerStatus();
-    }
-
-    private void startGame()
-    {
-        ScenesManager.Scene gameScene; 
-        #if UNITY_STANDALONE_WIN
-            gameScene = ScenesManager.Scene.DIMuseumVR;
-        #elif UNITY_ANDROID
-            gameScene = ScenesManager.Scene.SampleScene;
-        #endif
-        ScenesManager.Instance.LoadScene(gameScene);
     }
 }

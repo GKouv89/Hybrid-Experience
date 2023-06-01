@@ -12,7 +12,7 @@ public class LobbyManager : MonoBehaviour
 {
     public static LobbyManager Instance; 
     public TMP_InputField lobbyName;
-    private bool isHost = false;
+    public bool isHost = false;
     private Lobby myLobby;
     public Lobby MyLobby
     {
@@ -23,6 +23,19 @@ public class LobbyManager : MonoBehaviour
             if(OnLobbyChange != null){ OnLobbyChange(); }
         }
     }
+
+    private string gamehasStarted = "false";
+    public string GameHasStarted
+    {
+        get { return gamehasStarted; }
+        set
+        {
+            gamehasStarted = value;
+            if(OnGameStatusChange != null){ OnGameStatusChange(); }
+        }
+    }
+    public delegate void OnGameStatusChangeDelegate();
+    public event OnGameStatusChangeDelegate OnGameStatusChange;
 
     public delegate void OnLobbyChangeDelegate();
     public event OnLobbyChangeDelegate OnLobbyChange;
@@ -53,6 +66,7 @@ public class LobbyManager : MonoBehaviour
         };
 
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        this.OnGameStatusChange += ScenesManager.Instance.startGame;
     }
 
     public async void CreateLobby() {
@@ -71,11 +85,18 @@ public class LobbyManager : MonoBehaviour
                         value: MainManager.deviceType,
                         index: DataObject.IndexOptions.S1)
                 },
+                {
+                    "HasGameStarted", new DataObject(
+                        visibility: DataObject.VisibilityOptions.Public,
+                        value: "false",
+                        index: DataObject.IndexOptions.S2)
+                },
             };
             isHost = true;
 
             Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName.text, maxPlayers, createLobbyOptions);
             myLobby = lobby;
+
             // LobbyService.Instance.SubscribeToLobbyEventsAsync(lobbyId, callback);
 
             Debug.Log("Created Lobby! " + lobby.Name + " " + lobby.MaxPlayers + " " + lobby.Data["HostGameMode"].Value);
@@ -139,6 +160,37 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
+    public async void UpdateGameStatus(){
+        try 
+        {
+            string newGameStatus;
+            if(myLobby.Data["HasGameStarted"].Value.ToString().Equals("false"))
+            {
+                newGameStatus = "true";
+            }
+            else
+            {
+                newGameStatus = "false";
+            }
+            UpdateLobbyOptions options = new UpdateLobbyOptions();
+            options.Data = new Dictionary<string, DataObject>()
+            {
+                {
+                    "HasGameStarted", new DataObject(
+                        DataObject.VisibilityOptions.Public, newGameStatus
+                    )
+                },
+            };
+
+            myLobby = await LobbyService.Instance.UpdateLobbyAsync(myLobby.Id, options);
+            GameHasStarted = newGameStatus;
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log(e);
+        }
+    }
+
     private async void HandleLobbyPollForUpdates() {
         if(MyLobby != null)
         {
@@ -149,6 +201,14 @@ public class LobbyManager : MonoBehaviour
                 lobbyUpdateTimer = lobbyUpdateTimerMax;
 
                 Lobby lobby = await LobbyService.Instance.GetLobbyAsync(myLobby.Id);
+                string newGameStatus = lobby.Data["HasGameStarted"].Value.ToString();
+                string oldGameStatus = GameHasStarted;
+                Debug.Log("New game Status: " + newGameStatus);
+                Debug.Log("Old game Status: " + oldGameStatus);
+                if(!oldGameStatus.Equals(newGameStatus))
+                {
+                    GameHasStarted = newGameStatus;
+                }
                 MyLobby = lobby;
             }
         }
@@ -169,7 +229,10 @@ public class LobbyManager : MonoBehaviour
 
     private void Update(){
         HandleLobbyHeartbeat();
-        HandleLobbyPollForUpdates();
+        if(myLobby != null && !GameHasStarted.Equals("true"))
+        {
+            HandleLobbyPollForUpdates();
+        }
     }
 
     public async Task<List<Lobby>> SearchForLobbies() {
@@ -189,7 +252,12 @@ public class LobbyManager : MonoBehaviour
                     field: QueryFilter.FieldOptions.AvailableSlots,
                     op: QueryFilter.OpOptions.EQ,
                     value: "1"
-                )                
+                ),
+                new QueryFilter(
+                    field: QueryFilter.FieldOptions.S2,
+                    op: QueryFilter.OpOptions.EQ,
+                    value: "false"
+                ),
             };
 
             QueryResponse queryResponse = await Lobbies.Instance.QueryLobbiesAsync(options);
