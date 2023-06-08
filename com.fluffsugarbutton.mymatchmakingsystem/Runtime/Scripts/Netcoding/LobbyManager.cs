@@ -77,6 +77,9 @@ public class LobbyManager : MonoBehaviour
                 Player = GetPlayer()
             };
             player = createLobbyOptions.Player;
+
+            string joinCode = await RelayManager.Instance.CreateAllocation();
+
             createLobbyOptions.Data = new Dictionary<string, DataObject>()
             {
                 {
@@ -91,6 +94,12 @@ public class LobbyManager : MonoBehaviour
                         value: "false",
                         index: DataObject.IndexOptions.S2)
                 },
+                {
+                    "AllocationJoinCode", new DataObject(
+                        visibility: DataObject.VisibilityOptions.Member,
+                        value: joinCode,
+                        index: DataObject.IndexOptions.S3)
+                },
             };
             isHost = true;
 
@@ -100,6 +109,8 @@ public class LobbyManager : MonoBehaviour
             // LobbyService.Instance.SubscribeToLobbyEventsAsync(lobbyId, callback);
 
             Debug.Log("Created Lobby! " + lobby.Name + " " + lobby.MaxPlayers + " " + lobby.Data["HostGameMode"].Value);
+            await RelayManager.Instance.CreateAllocation();
+
             ScenesManager.Instance.LoadScene(ScenesManager.Scene.WaitingRoom);
         }catch (LobbyServiceException e){
             Debug.Log(e);
@@ -114,6 +125,7 @@ public class LobbyManager : MonoBehaviour
         player = options.Player; 
         Lobby lobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobbyId, options);
         myLobby = lobby;
+        await RelayManager.Instance.JoinRelay(lobby.Data["AllocationJoinCode"].Value.ToString());
         ScenesManager.Instance.LoadScene(ScenesManager.Scene.WaitingRoom);
     }
 
@@ -203,8 +215,6 @@ public class LobbyManager : MonoBehaviour
                 Lobby lobby = await LobbyService.Instance.GetLobbyAsync(myLobby.Id);
                 string newGameStatus = lobby.Data["HasGameStarted"].Value.ToString();
                 string oldGameStatus = GameHasStarted;
-                Debug.Log("New game Status: " + newGameStatus);
-                Debug.Log("Old game Status: " + oldGameStatus);
                 if(!oldGameStatus.Equals(newGameStatus))
                 {
                     GameHasStarted = newGameStatus;
