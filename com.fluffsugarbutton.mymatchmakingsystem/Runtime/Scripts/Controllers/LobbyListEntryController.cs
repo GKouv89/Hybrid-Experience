@@ -37,4 +37,10 @@ public class LobbyListEntryController
             LobbyManager.Instance.JoinLobby(lobbyId);
         };
     }
+
+    public void SetEmptyListData(){
+        joinButton.RemoveFromHierarchy();
+        hostUsernameLabel.RemoveFromHierarchy();
+        lobbyNameLabel.text = "No lobbies currently. Try refreshing.";
+    }
 }

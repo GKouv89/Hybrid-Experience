@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Packages/com.fluffsugarbutton.mymatchmakingsystem/Runtime/UI/USS/LobbyInfo.uss?fileID=7433441132597879392&amp;guid=debbb0c142307344eb97d509f1ff086e&amp;type=3#LobbyInfo" />
+    <ui:VisualElement name="lobbyInfo" class="container lobby-info-row" style="flex-wrap: wrap; flex-grow: 0;">
+        <ui:VisualElement name="text-container" style="flex-basis: auto; flex-direction: row; flex-shrink: 0; align-items: auto; flex-grow: 1; height: auto; max-height: 70px;">
+            <ui:Label text="No lobbies found. Try refreshing." display-tooltip-when-elided="true" name="LobbyName" style="white-space: nowrap; font-size: 32px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

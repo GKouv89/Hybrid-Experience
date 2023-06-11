@@ -269,3 +269,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ListEntryTemplate: {fileID: 9197481963319205126, guid: 9c76d60c88be032429ee00ed4e46453f, type: 3}
+  EmptyListEntryTemplate: {fileID: 9197481963319205126, guid: 4d59ade2df193e3448831442d3aa7e4e, type: 3}
