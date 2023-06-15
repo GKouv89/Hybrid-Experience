@@ -5,8 +5,6 @@ public class LobbyListView : MonoBehaviour
 {
     [SerializeField]
     VisualTreeAsset ListEntryTemplate;
-    [SerializeField]
-    VisualTreeAsset EmptyListEntryTemplate;
 
     void OnEnable()
     {
@@ -15,6 +13,7 @@ public class LobbyListView : MonoBehaviour
 
         // Initialize the character list controller
         var lobbyListController = new LobbyListController();
-        lobbyListController.InitializeLobbyList(uiDocument.rootVisualElement, ListEntryTemplate, EmptyListEntryTemplate);
+        lobbyListController.InitializeUtilityButtons(uiDocument.rootVisualElement);
+        lobbyListController.InitializeLobbyList(uiDocument.rootVisualElement, ListEntryTemplate);
     }
 }

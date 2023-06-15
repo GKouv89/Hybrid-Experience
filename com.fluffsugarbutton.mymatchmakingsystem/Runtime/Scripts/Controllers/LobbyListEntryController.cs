@@ -33,7 +33,6 @@ public class LobbyListEntryController
         hostUsernameLabel.text = lobbyInfoData.Players[0].Data["playerName"].Value.ToString();
         joinButton.clickable.activators.Add(new ManipulatorActivationFilter { button = MouseButton.LeftMouse });
         joinButton.clicked += () => {
-            // Debug.Log("Join Button was pressed!");
             LobbyManager.Instance.JoinLobby(lobbyId);
         };
     }

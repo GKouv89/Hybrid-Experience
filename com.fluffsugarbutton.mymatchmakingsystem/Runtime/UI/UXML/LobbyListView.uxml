@@ -12,5 +12,8 @@
             <ui:Button text="Refresh " display-tooltip-when-elided="true" name="refreshButton" class="lobby-button" />
         </ui:VisualElement>
         <ui:ListView focusable="true" name="listOfLobbies" style="flex-shrink: 0; flex-grow: 1;" />
+        <ui:VisualElement name="backButtonContainer">
+            <ui:Button text="Back to Lobby Options" display-tooltip-when-elided="true" name="backButton" class="lobby-info-row lobby-button" style="white-space: normal; font-size: 28px;" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -14,6 +14,7 @@ public class LobbyMembers : MonoBehaviour
     private List<LobbyMemberDisplay> members;
     public Button statusButton;
     public Button startGameButton;
+    [SerializeField] private Button backButton;
 
     private LobbyMemberDisplay createMember(Player player, Transform parent){
         LobbyMemberDisplay member;
@@ -53,6 +54,8 @@ public class LobbyMembers : MonoBehaviour
 
         startGameButton.onClick.AddListener(LobbyManager.Instance.UpdateGameStatus);
         startGameButton.interactable = false;
+
+        backButton.onClick.AddListener(LeaveLobby);
     }
 
     private void updateMembers()
@@ -60,7 +63,7 @@ public class LobbyMembers : MonoBehaviour
         List<Player> players = LobbyManager.Instance.MyLobby.Players;
 
         // Case no. 1: new member was added
-        if(players.Count != members.Count)
+        if(players.Count > members.Count)
         {
             foreach(Player player in players)
             {
@@ -71,8 +74,26 @@ public class LobbyMembers : MonoBehaviour
                 }
             }
         }
+        else if(players.Count < members.Count) // Case no. 2: A player was disconnected
+        {
+            Debug.Log("A player has disconnected");
+            foreach(LobbyMemberDisplay tempmember in members)
+            {
+                Debug.Log("Checking player " + tempmember.username.text + " 's connection status...");
+                if(!players.Exists(x => x.Data["playerName"].Value == tempmember.username.text))
+                {
+                    Debug.Log("Player " + tempmember.username.text + " has disconnected.");
+                    members.Remove(tempmember);
+                    Destroy(tempmember);
+                    break;
+                }else
+                {
+                    Debug.Log("Player " + tempmember.username.text + " is still connected.");
+                }
+            }
+        }
 
-        // Case no. 2: A player's readiness level has changed
+        // Case no. 3: A player's readiness level has changed
         bool allPlayersReady = true;
         LobbyMemberDisplay member;
         for(int i = 0; i < players.Count; i++){
@@ -99,5 +120,9 @@ public class LobbyMembers : MonoBehaviour
 
     private void changePlayerStatus(){
         LobbyManager.Instance.UpdatePlayerStatus();
+    }
+
+    private async void LeaveLobby(){
+        await LobbyManager.Instance.LeaveLobby();
     }
 }

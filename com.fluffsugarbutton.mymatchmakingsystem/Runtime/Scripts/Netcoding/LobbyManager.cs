@@ -69,16 +69,22 @@ public class LobbyManager : MonoBehaviour
         this.OnGameStatusChange += ScenesManager.Instance.startGame;
     }
 
+    private void DisconnectionCallback()
+    {
+        Debug.Log("LOBBY: A client disconnect was detected.");
+    }
+
     public async void CreateLobby() {
         try {
             int maxPlayers = 2;
-            CreateLobbyOptions createLobbyOptions = new CreateLobbyOptions{
-                IsPrivate = false,
-                Player = GetPlayer()
-            };
-            player = createLobbyOptions.Player;
 
             string joinCode = await RelayManager.Instance.CreateAllocation();
+
+            CreateLobbyOptions createLobbyOptions = new CreateLobbyOptions{
+                IsPrivate = false,
+                Player = GetPlayer(),
+            };
+            player = createLobbyOptions.Player;
 
             createLobbyOptions.Data = new Dictionary<string, DataObject>()
             {
@@ -109,7 +115,6 @@ public class LobbyManager : MonoBehaviour
             // LobbyService.Instance.SubscribeToLobbyEventsAsync(lobbyId, callback);
 
             Debug.Log("Created Lobby! " + lobby.Name + " " + lobby.MaxPlayers + " " + lobby.Data["HostGameMode"].Value);
-            await RelayManager.Instance.CreateAllocation();
 
             ScenesManager.Instance.LoadScene(ScenesManager.Scene.WaitingRoom);
         }catch (LobbyServiceException e){
@@ -124,19 +129,25 @@ public class LobbyManager : MonoBehaviour
         };
         player = options.Player; 
         Lobby lobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobbyId, options);
+        
         myLobby = lobby;
         await RelayManager.Instance.JoinRelay(lobby.Data["AllocationJoinCode"].Value.ToString());
+        UpdatePlayerRelayStatus();
+        
         ScenesManager.Instance.LoadScene(ScenesManager.Scene.WaitingRoom);
     }
 
     private Player GetPlayer(){
-        return new Player{
-            Data = new Dictionary<string, PlayerDataObject>{
-                {"playerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, MainManager.Instance.username)},
-                {"deviceType", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, MainManager.deviceType)},
-                {"ready", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, "Not Ready")}
-            }
-        };
+        return new Player (
+                            id: AuthenticationService.Instance.PlayerId, 
+                            allocationId: RelayManager.Instance.MyAllocationId
+            ) {
+                Data = new Dictionary<string, PlayerDataObject>{
+                    {"playerName", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, MainManager.Instance.username)},
+                    {"deviceType", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Public, MainManager.deviceType)},
+                    {"ready", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, "Not Ready")}
+                },
+            };
     }
 
     public async void UpdatePlayerStatus(){
@@ -168,6 +179,31 @@ public class LobbyManager : MonoBehaviour
         }
         catch (LobbyServiceException e)
         {
+            Debug.Log(e);
+        }
+    }
+
+    public async void UpdatePlayerRelayStatus(){
+        try{
+            UpdatePlayerOptions options = new UpdatePlayerOptions();
+            options.AllocationId = RelayManager.Instance.MyAllocationId;
+
+            Lobby newLobby = await LobbyService.Instance.UpdatePlayerAsync(myLobby.Id, player.Id, options);
+            
+            // Updating local player copy
+            foreach(Player tempPlayer in newLobby.Players)
+            {                
+                Debug.Log(tempPlayer.Id + " " + tempPlayer.Data["playerName"].Value + " " + tempPlayer.AllocationId);
+                if(player.Id == tempPlayer.Id)
+                {
+                    Debug.Log("Player found. Updating local player copy...");
+                    player = tempPlayer;
+                    // break;
+                }
+            }
+            myLobby = newLobby;
+
+        }catch (LobbyServiceException e){
             Debug.Log(e);
         }
     }
@@ -211,8 +247,8 @@ public class LobbyManager : MonoBehaviour
             {
                 float lobbyUpdateTimerMax = 1.1f;
                 lobbyUpdateTimer = lobbyUpdateTimerMax;
-
                 Lobby lobby = await LobbyService.Instance.GetLobbyAsync(myLobby.Id);
+                
                 string newGameStatus = lobby.Data["HasGameStarted"].Value.ToString();
                 string oldGameStatus = GameHasStarted;
                 if(!oldGameStatus.Equals(newGameStatus))
@@ -223,6 +259,12 @@ public class LobbyManager : MonoBehaviour
             }
         }
     }
+
+    // private async Task Reconnect()
+    // {
+    //     await LobbyService.Instance.ReconnectToLobbyAsync(MyLobby.Id);
+    //     Debug.Log("Reconnected");
+    // }
 
     private async void HandleLobbyHeartbeat(){
         if(myLobby != null && isHost)
@@ -284,5 +326,21 @@ public class LobbyManager : MonoBehaviour
             Debug.Log(e);
         }
         return result;
+    }
+
+    public async Task LeaveLobby()
+    {
+        try
+        {
+            if(!isHost)
+            {
+                string playerId = AuthenticationService.Instance.PlayerId;
+                await LobbyService.Instance.RemovePlayerAsync(MyLobby.Id, playerId);
+            }
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log(e);
+        }
     }
 }

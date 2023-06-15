@@ -1,16 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Unity.Netcode;
-using Unity.Netcode.Transports.UTP;
-using Unity.Networking.Transport.Relay;
 using UnityEngine;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
+using Unity.Networking.Transport.Relay;
 
 public class RelayManager : MonoBehaviour
 {
     public static RelayManager Instance; 
+    private Allocation myAllocation;
+    private JoinAllocation myJoinAllocation;
+    public string MyAllocationId {
+        get
+        { 
+            if(myAllocation != null)
+            {
+                return myAllocation.AllocationId.ToString(); 
+            }else if(myJoinAllocation != null)
+            {
+                return myJoinAllocation.AllocationId.ToString(); 
+            }else{
+                return null;
+            }
+        }
+    }
 
     private void Awake()
     {
@@ -29,25 +43,13 @@ public class RelayManager : MonoBehaviour
         try
         {
             Allocation allocation = await RelayService.Instance.CreateAllocationAsync(2);
+            myAllocation = allocation;
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId); 
-
-            // RelayServerEndpoint data = new RelayServerEndpoint(
-            //     "dtls",
-            //     RelayServerEndpoint.NetworkOptions.Udp,
-            //     true,
-            //     false,
-            //     allocation.RelayServer.IpV4,
-            //     allocation.RelayServer.Port
-            // );
-
             RelayServerData data = new RelayServerData(
-                allocation,
+                myAllocation,
                 "dtls"
             );
-
-            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(data);
-            NetworkManager.Singleton.StartHost();
-            
+            ConnectionManager.Instance.StartHosting(data);
             return joinCode;
         } catch (RelayServiceException e)
         {
@@ -61,24 +63,12 @@ public class RelayManager : MonoBehaviour
         try
         {
             JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
-
-            // RelayServerEndpoint data = new RelayServerEndpoint(
-            //     "dtls",
-            //     RelayServerEndpoint.NetworkOptions.Udp,
-            //     true,
-            //     false,
-            //     joinAllocation.RelayServer.IpV4,
-            //     joinAllocation.RelayServer.Port
-            // );
-
+            myJoinAllocation = joinAllocation;
             RelayServerData data = new RelayServerData(
-                joinAllocation,
+                myJoinAllocation,
                 "dtls"
             );
-
-            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(data);
-            NetworkManager.Singleton.StartClient();
-
+            ConnectionManager.Instance.StartClient(data);
         } catch (RelayServiceException e)
         {
             Debug.Log(e);
