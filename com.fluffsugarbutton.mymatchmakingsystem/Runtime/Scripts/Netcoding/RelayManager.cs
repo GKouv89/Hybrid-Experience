@@ -6,73 +6,84 @@ using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using Unity.Networking.Transport.Relay;
 
-public class RelayManager : MonoBehaviour
-{
-    public static RelayManager Instance; 
-    private Allocation myAllocation;
-    private JoinAllocation myJoinAllocation;
-    public string MyAllocationId {
-        get
-        { 
-            if(myAllocation != null)
+namespace MatchMaking.ConnectionManagement{
+    public class RelayManager : MonoBehaviour
+    {
+        public static RelayManager Instance; 
+        private Allocation myAllocation;
+        private JoinAllocation myJoinAllocation;
+        public string MyAllocationId {
+            get
+            { 
+                if(myAllocation != null)
+                {
+                    return myAllocation.AllocationId.ToString(); 
+                }else if(myJoinAllocation != null)
+                {
+                    return myJoinAllocation.AllocationId.ToString(); 
+                }else{
+                    return null;
+                }
+            }
+        }
+
+        private void Awake()
+        {
+            if (Instance != null)
             {
-                return myAllocation.AllocationId.ToString(); 
-            }else if(myJoinAllocation != null)
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        
+        public async Task<string> CreateAllocation() 
+        {
+            try
             {
-                return myJoinAllocation.AllocationId.ToString(); 
-            }else{
+                Allocation allocation = await RelayService.Instance.CreateAllocationAsync(2);
+                myAllocation = allocation;
+                string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId); 
+                RelayServerData data = new RelayServerData(
+                    myAllocation,
+                    "dtls"
+                );
+                ConnectionManager.Instance.StartHosting(data);
+                return joinCode;
+            } catch (RelayServiceException e)
+            {
+                Debug.Log(e);
                 return null;
             }
         }
-    }
 
-    private void Awake()
-    {
-        if (Instance != null)
+        public async Task JoinRelay(string joinCode)
         {
-            Destroy(gameObject);
-            return;
+            try
+            {
+                JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
+                myJoinAllocation = joinAllocation;
+                RelayServerData data = new RelayServerData(
+                    myJoinAllocation,
+                    "dtls"
+                );
+                ConnectionManager.Instance.StartClient(data);
+            } catch (RelayServiceException e)
+            {
+                Debug.Log(e);
+            }
         }
 
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-    
-    public async Task<string> CreateAllocation() 
-    {
-        try
+        public void Cleanup()
         {
-            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(2);
-            myAllocation = allocation;
-            string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId); 
-            RelayServerData data = new RelayServerData(
-                myAllocation,
-                "dtls"
-            );
-            ConnectionManager.Instance.StartHosting(data);
-            return joinCode;
-        } catch (RelayServiceException e)
-        {
-            Debug.Log(e);
-            return null;
+            // If we previously joined a lobby,
+            // then we're holding a reference to the allocation
+            // that we need to let go of.
+            myAllocation = null;
+            myJoinAllocation = null;
         }
-    }
 
-    public async Task JoinRelay(string joinCode)
-    {
-        try
-        {
-            JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
-            myJoinAllocation = joinAllocation;
-            RelayServerData data = new RelayServerData(
-                myJoinAllocation,
-                "dtls"
-            );
-            ConnectionManager.Instance.StartClient(data);
-        } catch (RelayServiceException e)
-        {
-            Debug.Log(e);
-        }
     }
-
 }

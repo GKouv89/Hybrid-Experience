@@ -28,6 +28,15 @@ public class LobbyMemberDisplay : MonoBehaviour
         this.username.color = Color.blue;
     }
 
+    public bool isReady()
+    {
+        if(this.playerStatus.color == Color.red)
+        {
+            return false;
+        }
+        return true;
+    }
+
     // private void Update()
     // {
     //     Debug.Log("Update from LobbyMemberDisplay");

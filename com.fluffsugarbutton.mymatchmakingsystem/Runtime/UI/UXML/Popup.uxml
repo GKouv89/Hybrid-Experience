@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="width: 100%; height: 100%; -unity-background-image-tint-color: rgb(255, 255, 255); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; flex-shrink: 0; flex-basis: 100%; top: 10%;">
+        <ui:VisualElement name="VisualElement" style="background-color: rgb(255, 255, 255); height: auto; width: 90%; position: relative; top: 20%; left: 5%; right: 5%; justify-content: space-around; align-items: stretch; bottom: auto; border-left-width: 10px; border-right-width: 10px; border-top-width: 10px; border-bottom-width: 10px; flex-shrink: 0; flex-basis: 60%;">
+            <ui:Label text="Host has left the Lobby" display-tooltip-when-elided="true" style="-unity-text-align: upper-center; top: 0; -unity-font-style: bold; font-size: 32px;" />
+            <ui:Label text="The host of the Lobby you&apos;re currently in has left. Click &apos;OK&apos; to be redirected to Lobby selection screen." display-tooltip-when-elided="true" style="-unity-text-align: upper-center; flex-wrap: nowrap; white-space: normal; font-size: 20px;" />
+            <ui:VisualElement style="justify-content: flex-end; align-items: stretch; flex-direction: row; width: 100%;">
+                <ui:Button text="OK" display-tooltip-when-elided="true" style="width: 33%; justify-content: flex-start; right: auto; align-items: stretch;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
