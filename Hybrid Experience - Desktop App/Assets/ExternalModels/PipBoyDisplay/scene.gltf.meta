@@ -1,0 +1,67 @@
+fileFormatVersion: 2
+guid: d700328d45efe5a4ba3928d9eaf9df1b
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 715df9372183c47e389bb6e19fbc3b52, type: 3}
+  editorImportSettings:
+    generateSecondaryUVSet: 0
+  importSettings:
+    nodeNameMethod: 1
+    animationMethod: 2
+    generateMipMaps: 1
+    defaultMinFilterMode: 9729
+    defaultMagFilterMode: 9729
+    anisotropicFilterLevel: 1
+  instantiationSettings:
+    mask: -1
+    layer: 0
+    skinUpdateWhenOffscreen: 1
+    lightIntensityFactor: 1
+    sceneObjectCreation: 2
+  assetDependencies:
+  - type: 0
+    originalUri: Assets\ExternalModels\PipBoyDisplay\scene.bin
+    assetPath: Assets\ExternalModels\PipBoyDisplay\scene.bin
+  - type: 1
+    originalUri: Assets\ExternalModels\PipBoyDisplay\textures\PIP_Main_baseColor.jpeg
+    assetPath: Assets\ExternalModels\PipBoyDisplay\textures\PIP_Main_baseColor.jpeg
+  - type: 1
+    originalUri: Assets\ExternalModels\PipBoyDisplay\textures\PIP_Main_metallicRoughness.png
+    assetPath: Assets\ExternalModels\PipBoyDisplay\textures\PIP_Main_metallicRoughness.png
+  - type: 1
+    originalUri: Assets\ExternalModels\PipBoyDisplay\textures\PIP_Main_emissive.jpeg
+    assetPath: Assets\ExternalModels\PipBoyDisplay\textures\PIP_Main_emissive.jpeg
+  - type: 1
+    originalUri: Assets\ExternalModels\PipBoyDisplay\textures\PIP_Main_normal.png
+    assetPath: Assets\ExternalModels\PipBoyDisplay\textures\PIP_Main_normal.png
+  - type: 1
+    originalUri: Assets\ExternalModels\PipBoyDisplay\textures\Screens_baseColor.jpeg
+    assetPath: Assets\ExternalModels\PipBoyDisplay\textures\Screens_baseColor.jpeg
+  - type: 1
+    originalUri: Assets\ExternalModels\PipBoyDisplay\textures\Screens_metallicRoughness.png
+    assetPath: Assets\ExternalModels\PipBoyDisplay\textures\Screens_metallicRoughness.png
+  - type: 1
+    originalUri: Assets\ExternalModels\PipBoyDisplay\textures\Screens_emissive.jpeg
+    assetPath: Assets\ExternalModels\PipBoyDisplay\textures\Screens_emissive.jpeg
+  - type: 1
+    originalUri: Assets\ExternalModels\PipBoyDisplay\textures\Screens_normal.png
+    assetPath: Assets\ExternalModels\PipBoyDisplay\textures\Screens_normal.png
+  - type: 1
+    originalUri: Assets\ExternalModels\PipBoyDisplay\textures\Leather_baseColor.jpeg
+    assetPath: Assets\ExternalModels\PipBoyDisplay\textures\Leather_baseColor.jpeg
+  - type: 1
+    originalUri: Assets\ExternalModels\PipBoyDisplay\textures\Leather_metallicRoughness.png
+    assetPath: Assets\ExternalModels\PipBoyDisplay\textures\Leather_metallicRoughness.png
+  - type: 1
+    originalUri: Assets\ExternalModels\PipBoyDisplay\textures\Leather_normal.png
+    assetPath: Assets\ExternalModels\PipBoyDisplay\textures\Leather_normal.png
+  reportItems:
+  - type: 2
+    code: 20
+    messages:
+    - KHR_materials_emissive_strength
