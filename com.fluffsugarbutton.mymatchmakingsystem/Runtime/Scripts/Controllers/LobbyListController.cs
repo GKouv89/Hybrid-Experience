@@ -21,8 +21,6 @@ namespace MatchMaking.LobbySetup.UI
         Button backButton;
         Button refreshButton;
         List<Lobby> AllLobbies;
-
-        LobbyManager m_LobbyManager = LobbyManager.Instance;
         public void InitializeUtilityButtons(VisualElement root)
         {
             backButton = root.Q<Button>("backButton");
@@ -69,7 +67,7 @@ namespace MatchMaking.LobbySetup.UI
 
         async Task EnumerateAllLobbies()
         {
-            AllLobbies = await m_LobbyManager.SearchForLobbies();
+            AllLobbies = await MainManager.Instance.SearchForLobbies();
         }
 
         void FillLobbyList()

@@ -7,7 +7,6 @@ namespace MatchMaking.LobbySetup.UI
     public class PopupView : MonoBehaviour
     {
         private UIDocument myDocRef;
-        private MainManager m_mainManager = MainManager.Instance;
         void OnDisable()
         {
             Debug.Log("DISABLED");
@@ -31,7 +30,7 @@ namespace MatchMaking.LobbySetup.UI
             okButton.clickable.activators.Add(new ManipulatorActivationFilter { button = MouseButton.LeftMouse });
             okButton.clicked += () => {
                 Debug.Log("Clickity");
-                m_mainManager.LeaveLobby();
+                MainManager.Instance.LeaveLobby();
             };
         }
 

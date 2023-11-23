@@ -7,9 +7,8 @@ using Unity.Services.Relay.Models;
 using Unity.Networking.Transport.Relay;
 
 namespace MatchMaking.ConnectionManagement{
-    public class RelayManager : MonoBehaviour
+    public class RelayManager
     {
-        public static RelayManager Instance; 
         private Allocation myAllocation;
         private JoinAllocation myJoinAllocation;
         public string MyAllocationId {
@@ -25,18 +24,6 @@ namespace MatchMaking.ConnectionManagement{
                     return null;
                 }
             }
-        }
-
-        private void Awake()
-        {
-            if (Instance != null)
-            {
-                Destroy(gameObject);
-                return;
-            }
-
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         
         public async Task<string> CreateAllocation() 

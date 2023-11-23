@@ -11,15 +11,12 @@ namespace MatchMaking.LobbySetup.UI {
         [SerializeField] Button _createLobby;
         [SerializeField] Button _searchForLobby;
         private TMP_InputField lobbyName;
-        [SerializeField] LobbyManager m_LobbyManager;
-        // private LobbyManager m_LobbyManager = LobbyManager.Instance;
-        private MainManager m_mainManager = MainManager.Instance;
-        // Start is called before the first frame update
+
         void Awake()
         {
             lobbyName = GetComponentInChildren<TMP_InputField>(true);
         }
-
+        // Start is called before the first frame update
         void Start()
         {
             _createLobby.onClick.AddListener(CreateLobby);
@@ -28,8 +25,7 @@ namespace MatchMaking.LobbySetup.UI {
 
         private void CreateLobby() 
         {
-            m_LobbyManager.LobbyName = lobbyName.text;
-            m_mainManager.CreateLobby();
+            MainManager.Instance.CreateLobby(lobbyName.text);
         }
 
         private void SearchForLobby()
