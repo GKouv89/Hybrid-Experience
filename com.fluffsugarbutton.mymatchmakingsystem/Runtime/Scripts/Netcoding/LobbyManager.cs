@@ -55,6 +55,7 @@ namespace MatchMaking.LobbySetup{
         private bool playerReady = false;
         private float heartbeatTimer;
         private float lobbyUpdateTimer;
+        
         private void Awake()
         {
             if (Instance != null)

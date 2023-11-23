@@ -1,8 +1,17 @@
 using UnityEngine;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Diagnostics;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
+using Unity.Services.Lobbies;
+using Unity.Services.Lobbies.Models;
+using Unity.Services.Relay.Models;
+using Unity.Networking.Transport.Relay;
 using UnityEngine.UIElements;
+using MatchMaking.LobbySetup;
 using Debug = UnityEngine.Debug;
 
 // Implements some of the functionality of the GameManager from the Game Lobby sample repo 
@@ -14,12 +23,9 @@ namespace MatchMaking{
         public string username;
         public static string deviceType;
         // public bool hasGameStarted = false;
-        // public string playerId;   
 
         vivox.VivoxSetup m_VivoxSetup = new vivox.VivoxSetup();
-        private LobbySetup.LobbyManager m_LobbyManager;
-        private ConnectionManagement.ConnectionManager m_ConnectionManager;
-        private ConnectionManagement.RelayManager m_RelayManager;
+        private ConnectionManagement.RelayManager m_RelayManager = new ConnectionManagement.RelayManager();
         async void Awake()
         {
             if (Instance != null)
@@ -37,7 +43,7 @@ namespace MatchMaking{
                 Debug.Log("Signed in " + AuthenticationService.Instance.PlayerId);
             };
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
-            m_VivoxSetup.Initialize();
+            // m_VivoxSetup.Initialize();
 
             DontDestroyOnLoad(gameObject);
         }
@@ -50,62 +56,68 @@ namespace MatchMaking{
             #endif
         }
 
-        public async void CreateLobby()
+        public async void CreateLobby(string lobbyName)
         {
-            if(m_RelayManager == null){
-                m_RelayManager = ConnectionManagement.RelayManager.Instance;
-            }
-            if(m_LobbyManager == null){
-                m_LobbyManager = LobbySetup.LobbyManager.Instance;
-            }
+            var m_LobbyManager = LobbyManager.Instance;
+
             string joinCode = await m_RelayManager.CreateAllocation();
             string allocationId = m_RelayManager.MyAllocationId;
-            await m_LobbyManager.CreateLobby(allocationId, joinCode);
 
-            m_VivoxSetup.JoinChannel(m_LobbyManager.MyLobby.Id);
+            m_LobbyManager.LobbyName = lobbyName;
+            await m_LobbyManager.CreateLobby(allocationId, joinCode);
+            
+            // m_VivoxSetup.JoinChannel(m_LobbyManager.MyLobby.Id);
             ScenesManager.Instance.LoadScene(ScenesManager.Scene.WaitingRoom);
+            // LobbySetup.UI.PanelManager.Instance.ShowPanel("WaitingRoomPanel");
         }
 
         public async void JoinLobby(string lobbyId)
         {
-            if(m_RelayManager == null){
-                m_RelayManager = ConnectionManagement.RelayManager.Instance;
-            }
-            if(m_LobbyManager == null){
-                m_LobbyManager = LobbySetup.LobbyManager.Instance;
-            }
+            var m_LobbyManager = LobbyManager.Instance;
             // this is null at first
             string allocationId = m_RelayManager.MyAllocationId;
             string allocationJoinCode = await m_LobbyManager.JoinLobby(allocationId, lobbyId);
-
+            
             await m_RelayManager.JoinRelay(allocationJoinCode);
             // now that we've joined the relay, read the actual allocation id, and update the player's info
             allocationId = m_RelayManager.MyAllocationId;
             m_LobbyManager.UpdatePlayerRelayStatus(allocationId);
 
-            m_VivoxSetup.JoinChannel(lobbyId);
+            // m_VivoxSetup.JoinChannel(lobbyId);
             ScenesManager.Instance.LoadScene(ScenesManager.Scene.WaitingRoom);
+            // LobbySetup.UI.PanelManager.Instance.ShowPanel("WaitingRoomPanel");
         }
 
         public async void LeaveLobby()
         {
-            if(m_LobbyManager == null){
-                m_LobbyManager = LobbySetup.LobbyManager.Instance;
-            }
-            if(m_ConnectionManager == null)
-            {
-                m_ConnectionManager = ConnectionManagement.ConnectionManager.Instance;
-            }
             // Leave lobby
-            await m_LobbyManager.LeaveLobby();
+            await LobbyManager.Instance.LeaveLobby();
             // Leave Voice Channel
-            m_VivoxSetup.LeaveChannel();            
+            // m_VivoxSetup.LeaveChannel();            
             // We're offline now, any client or host
             // must stop
+            var m_ConnectionManager = ConnectionManagement.ConnectionManager.Instance;
             m_ConnectionManager.ChangeState(m_ConnectionManager._offlineState);
             // no relevant allocations any more, clean up references
-            ConnectionManagement.RelayManager.Instance.Cleanup();
-            ScenesManager.Instance.LoadScene(ScenesManager.Scene.LobbyList);
+            m_RelayManager.Cleanup();
+            ScenesManager.Instance.LoadScene(ScenesManager.Scene.LobbyOptions);
+            // LobbySetup.UI.PanelManager.Instance.ShowPanel("LobbyOptionsPanel");
+        }
+
+        public async Task<List<Lobby>> SearchForLobbies()
+        {
+            var res = await LobbyManager.Instance.SearchForLobbies();
+            return res;
+        }
+
+        public void UpdatePlayerStatus()
+        {
+            LobbyManager.Instance.UpdatePlayerStatus();
+        }
+
+        public void UpdateGameStatus()
+        {
+            LobbyManager.Instance.UpdateGameStatus();
         }
     }
 }

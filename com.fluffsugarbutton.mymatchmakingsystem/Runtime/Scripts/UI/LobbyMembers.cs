@@ -22,12 +22,11 @@ namespace MatchMaking.LobbySetup.UI
         [SerializeField] private Button backButton;
         [SerializeField] private GameObject Popup;
         private PopupView view;
-        private LobbyManager m_LobbyManager = LobbyManager.Instance;
         private LobbyMemberDisplay createMember(Player player, Transform parent){
             LobbyMemberDisplay member;
             member = Instantiate(prefab, parent);
             member.username.text = player.Data["playerName"].Value;
-            if(player.Data["playerName"].Value.Equals(m_LobbyManager.player.Data["playerName"].Value))
+            if(player.Data["playerName"].Value.Equals(LobbyManager.Instance.player.Data["playerName"].Value))
             {
                 member.isSameUser();
                 myMemberDisplay = member;
@@ -46,7 +45,7 @@ namespace MatchMaking.LobbySetup.UI
             return header;
         }
 
-        // Start is called before the first frame update
+        // // Start is called before the first frame update
         void Start()
         {
             // Disabling the popup
@@ -55,7 +54,9 @@ namespace MatchMaking.LobbySetup.UI
 
             members = new List<LobbyMemberDisplay>();
             header = createHeader(parent);
-            List<Player> players = m_LobbyManager.MyLobby.Players;
+
+            var m_LobbyManager = LobbyManager.Instance;
+            List<Player> players =  m_LobbyManager.MyLobby.Players;
             for (int i = 0; i < players.Count; i++){
                 members.Add(createMember(players[i], parent));
             }
@@ -63,7 +64,7 @@ namespace MatchMaking.LobbySetup.UI
             statusButton.onClick.AddListener(changePlayerStatus);
             m_LobbyManager.OnLobbyChange += updateMembers;
 
-            startGameButton.onClick.AddListener(m_LobbyManager.UpdateGameStatus);
+            startGameButton.onClick.AddListener(MainManager.Instance.UpdateGameStatus);
             startGameButton.interactable = false;
 
             backButton.onClick.AddListener(() => LeaveLobby(false));
@@ -71,6 +72,7 @@ namespace MatchMaking.LobbySetup.UI
 
         private void updateMembers()
         {
+            var m_LobbyManager = LobbyManager.Instance;
             List<Player> players = m_LobbyManager.MyLobby.Players;
             bool allPlayersReady = true;
 
@@ -146,12 +148,13 @@ namespace MatchMaking.LobbySetup.UI
         }
 
         private void changePlayerStatus(){
-            m_LobbyManager.UpdatePlayerStatus();
+            MainManager.Instance.UpdatePlayerStatus();
         }
 
         private void LeaveLobby(bool isForced){
             // No need to keep updating this scene.
-            m_LobbyManager.OnLobbyChange -= updateMembers;
+            var m_MainManager = MainManager.Instance;
+            LobbyManager.Instance.OnLobbyChange -= updateMembers;
             
             // Destroy everything here
             // Header
