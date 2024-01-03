@@ -1,0 +1,7 @@
+Alan
+Hello, I am Alan and this is a message. 
+This is the next one, where there will be a hint. 
+This one has a bit of *markup*. 
+This one has a hint. 
+[I need more help]
+{Here's the help you needed}
