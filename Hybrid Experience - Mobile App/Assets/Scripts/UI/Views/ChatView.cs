@@ -7,7 +7,11 @@ using UnityEngine.UIElements;
 public class ChatView : MonoBehaviour
 {
     [SerializeField]
-    VisualTreeAsset messageTemplate;
+    VisualTreeAsset firstMessageTemplate;
+    [SerializeField]
+    VisualTreeAsset plainMessageTemplate;
+    [SerializeField]
+    VisualTreeAsset hintTemplate;
     [SerializeField]
     Conversation aConvo;
     void OnEnable()
@@ -15,6 +19,6 @@ public class ChatView : MonoBehaviour
         var uiDocument = GetComponent<UIDocument>();
         ChatController controller = new();
         controller.Initialize(uiDocument.rootVisualElement, aConvo);
-        controller.InitializeMessageList(uiDocument.rootVisualElement, messageTemplate, aConvo.messages, aConvo.Sender);
+        controller.InitializeMessageList(uiDocument.rootVisualElement, firstMessageTemplate, plainMessageTemplate, hintTemplate, aConvo.messages, aConvo.Sender);
     }
 }

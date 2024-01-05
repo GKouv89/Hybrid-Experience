@@ -3,7 +3,7 @@
     <ui:VisualElement name="msgContainer" class="message" style="height: auto;">
         <ui:VisualElement name="pfpContainer" class="profilepic-container" style="justify-content: flex-start; width: 15%; height: 100%; align-items: center;" />
         <ui:VisualElement name="textContainer" class="text">
-            <ui:Label text="Label" display-tooltip-when-elided="true" name="Body" class="message-body" style="white-space: normal; flex-grow: 1;" />
+            <ui:Button text="Button" display-tooltip-when-elided="true" name="Hint" class="message-body" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -5,7 +5,9 @@ using UnityEngine.UIElements;
 
 public class ChatController
 {
-    VisualTreeAsset messageTemplate;
+    VisualTreeAsset firstMessageTemplate;
+    VisualTreeAsset plainMessageTemplate;
+    VisualTreeAsset plainHintTemplate;
     ScrollView messageList;
     public void Initialize(VisualElement root, Conversation convo)
     {
@@ -13,29 +15,39 @@ public class ChatController
         characterName.text = convo.Sender.charName;
     }
 
-    public void InitializeMessageList(VisualElement root, VisualTreeAsset msgTemplate, List<Message> messages, Character sender)
+    public void InitializeMessageList(VisualElement root, VisualTreeAsset firstMsgTemplate, VisualTreeAsset plainMsgTemplate, VisualTreeAsset pHintTemplate, List<Message> messages, Character sender)
     {
         messageList = root.Q<ScrollView>("messages");
-        messageTemplate = msgTemplate;
+        firstMessageTemplate = firstMsgTemplate;
+        plainMessageTemplate = plainMsgTemplate;
+        plainHintTemplate = pHintTemplate;
         FillMessageList(messages, sender);
     }
 
     public void FillMessageList(List<Message> messages, Character sender)
     {
-        for (var i = 0; i < messages.Count; i++)
+        bool isFirstMsg = true;
+        IUIController newListEntryLogic;
+        TemplateContainer newListEntry;
+        foreach (Message msg in messages)
         {
-            var newListEntry = messageTemplate.Instantiate();
-            var newListEntryLogic = new MessageController();
+            if(msg.hasHint)
+            {
+                newListEntry = plainHintTemplate.Instantiate();
+                newListEntryLogic = new HintController();
+            }
+            else
+            {
+                newListEntryLogic = isFirstMsg ? new FirstMessageController() : new MessageController();
+                newListEntry = isFirstMsg ? firstMessageTemplate.Instantiate() : plainMessageTemplate.Instantiate();
+            }
             newListEntry.userData = newListEntryLogic;
             newListEntryLogic.SetVisualElement(newListEntry);
-            newListEntryLogic.SetMessageData(sender);
-            if(i == 2)
-            {
-                // Testing how a long message looks like
-                var msgBody = newListEntry.Q<Label>("Body");
-                msgBody.text = "This is a very very very very very very very very very very long message.";
-            }
+            newListEntryLogic.SetMessageData(msg);
+            if(isFirstMsg)
+                ((FirstMessageController)newListEntryLogic).SetSenderData(sender);
             messageList.Add(newListEntry);
+            isFirstMsg = false;
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEditor;
+using UnityEngine.UIElements;
 
 public class ConversationParser
 {
@@ -27,9 +28,10 @@ public class ConversationParser
                 if(sr.Peek() == '[')
                 {
                     string hintLabel = sr.ReadLine();
+                    hintLabel = hintLabel[1..^1];
                     string hintText = sr.ReadLine();
-                    Hint hint = new(hintLabel, hintText);
-                    msg = new(line, hint);
+                    hintText = hintText[1..^1];
+                    msg = new(line, hintLabel, hintText);
                 }
                 else
                 {

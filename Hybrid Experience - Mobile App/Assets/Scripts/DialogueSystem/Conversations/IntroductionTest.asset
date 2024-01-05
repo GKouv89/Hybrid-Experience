@@ -16,10 +16,22 @@ MonoBehaviour:
   messages:
   - messageBody: 'Hello, I am Alan and this is a message. '
     hasHint: 0
+    hint:
+      hintLabel: 
+      hintText: 
   - messageBody: 'This is the next one, where there will be a hint. '
     hasHint: 0
+    hint:
+      hintLabel: 
+      hintText: 
   - messageBody: 'This one has a bit of *markup*. '
     hasHint: 0
+    hint:
+      hintLabel: 
+      hintText: 
   - messageBody: 'This one has a hint. '
     hasHint: 1
+    hint:
+      hintLabel: I need more help
+      hintText: Here's the help you needed
   Sender: {fileID: 11400000, guid: a52cab2506fe4fb48b8a66e21ff4d80c, type: 2}

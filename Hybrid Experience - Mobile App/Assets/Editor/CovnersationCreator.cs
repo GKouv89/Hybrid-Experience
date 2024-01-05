@@ -26,8 +26,8 @@ public class CovnersationCreator : EditorWindow
             foreach (Message msg in convo.messages)
             {
                 if(msg.hasHint){
-                    Debug.Log(msg.hint?.hintLabel);
-                    Debug.Log(msg.hint?.hintText);
+                    Debug.Log(msg.hint.hintLabel);
+                    Debug.Log(msg.hint.hintText);
                 }
             }
             string path = $"{assetPath}/{conversationName}.asset";

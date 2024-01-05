@@ -6,9 +6,7 @@ using UnityEngine;
 [Serializable]
 public struct Hint
 {
-    [TextAreaAttribute]
     public string hintLabel;
-    [TextAreaAttribute]
     public string hintText;
 
     public Hint(string label, string text)
@@ -24,20 +22,19 @@ public struct Message
     [TextAreaAttribute]
     public string messageBody;
     public bool hasHint; // Nice to add: Only show hintText when hasHint is true. Custom inspector windows with UI Toolkit.  
-    [SerializeField]
-    public Hint? hint;
+    public Hint hint; // Normally I would have added this as nullable, but unity doesn't serialize nullable types
 
     public Message(string body)
     {
         messageBody = body;
         hasHint = false;
-        hint = null;
+        hint = new(null, null);
     }
 
-    public Message(string body, Hint h)
+    public Message(string body, string hintLabel, string hintText)
     {
         hasHint = true;
-        hint = h;
+        hint = new Hint(hintLabel, hintText);
         messageBody = body;
     }
 }
