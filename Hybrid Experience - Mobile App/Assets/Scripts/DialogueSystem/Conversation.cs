@@ -22,7 +22,8 @@ public struct Message
     [TextAreaAttribute]
     public string messageBody;
     public bool hasHint; // Nice to add: Only show hintText when hasHint is true. Custom inspector windows with UI Toolkit.  
-    public Hint hint; // Normally I would have added this as nullable, but unity doesn't serialize nullable types
+    public Hint hint; // Normally I would have added this as nullable, but unity doesn't serialize nullable types. So, I end up having to create
+    // a hint but adding null fields to it. 
 
     public Message(string body)
     {

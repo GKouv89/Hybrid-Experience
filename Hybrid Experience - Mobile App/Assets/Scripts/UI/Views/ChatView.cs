@@ -18,7 +18,7 @@ public class ChatView : MonoBehaviour
     {
         var uiDocument = GetComponent<UIDocument>();
         ChatController controller = new();
-        controller.Initialize(uiDocument.rootVisualElement, aConvo);
-        controller.InitializeMessageList(uiDocument.rootVisualElement, firstMessageTemplate, plainMessageTemplate, hintTemplate, aConvo.messages, aConvo.Sender);
+        controller.Initialize(uiDocument.rootVisualElement, aConvo, firstMessageTemplate, plainMessageTemplate, hintTemplate);
+        StartCoroutine(controller.TypeMessages());
     }
 }

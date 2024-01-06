@@ -4,6 +4,7 @@
         <ui:VisualElement name="pfpContainer" class="profilepic-container" style="justify-content: flex-start; width: 15%; height: 100%; align-items: center;" />
         <ui:VisualElement name="textContainer" class="text">
             <ui:Button text="Button" display-tooltip-when-elided="true" name="Hint" class="message-body" />
+            <ui:Button text="I&apos;ve got this" display-tooltip-when-elided="true" name="Confirm" class="message-body" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
