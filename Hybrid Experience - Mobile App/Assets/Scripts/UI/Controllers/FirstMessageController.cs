@@ -20,4 +20,9 @@ public class FirstMessageController : MessageController
         profilePicture.style.backgroundImage = new StyleBackground(Sender.charSprite);
         senderName.text = Sender.charName;
     }
+
+    public void SetMessageBody(string body)
+    {
+        base.body.text = body;
+    }
 }

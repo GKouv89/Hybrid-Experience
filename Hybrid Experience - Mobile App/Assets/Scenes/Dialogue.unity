@@ -305,4 +305,7 @@ MonoBehaviour:
   firstMessageTemplate: {fileID: 9197481963319205126, guid: 6b03af3baa7cea14e9da7f5e69b2b8e4, type: 3}
   plainMessageTemplate: {fileID: 9197481963319205126, guid: 521c1163b07c13f4387ab17ef33ae44d, type: 3}
   hintTemplate: {fileID: 9197481963319205126, guid: 00a45901a347f8e47b161fb32a19a29b, type: 3}
+  hintConfirmationTemplate: {fileID: 9197481963319205126, guid: 1cee48e2806f7b742ac5b39989cc612c, type: 3}
   aConvo: {fileID: 11400000, guid: 7add28f93c98ec542b715327766ab638, type: 2}
+  self: {fileID: 11400000, guid: f20962be54719354e90ed6529bfb3980, type: 2}
+  firstMessageRightTemplate: {fileID: 9197481963319205126, guid: 4a92b0fc9062ffc4a879cd0d7d364830, type: 3}

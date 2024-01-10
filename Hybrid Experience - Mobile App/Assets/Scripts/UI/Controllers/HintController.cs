@@ -3,44 +3,44 @@ using UnityEngine.UIElements;
 
 public class HintController : IUIController
 {
-    private Button hint;
     private Button confirm;
-    private bool hintStatus = true;
-    private bool WaitingForHint{
-        get {return hintStatus;}
+    private bool wantsHint = false;
+    public bool UserWantsHint{
+        get {return wantsHint;}
         set {
-            hintStatus = value;
-            OnHintStatusChange();
+            Debug.Log("wantsHint: " + wantsHint);
+            wantsHint = value;
+            if(wantsHint)
+            {
+                OnUserWantsHint();
+            }
+            else
+            {
+                OnUserWantsNoHint();
+            }
         }
     }
     public delegate void OnHintStatusChangeDelegate();
-    public event OnHintStatusChangeDelegate OnHintStatusChange;
+    public event OnHintStatusChangeDelegate OnUserWantsHint;
+    public event OnHintStatusChangeDelegate OnUserWantsNoHint;
 
-    public void SetVisualElement(VisualElement elem)
+    public virtual void SetVisualElement(VisualElement elem)
     {
-        hint = elem.Q<Button>("Hint");
         confirm = elem.Q<Button>("Confirm");
-        hint.clickable.activators.Add(new ManipulatorActivationFilter { button = MouseButton.LeftMouse });
-        hint.clicked += ChangeHintStatus;
         confirm.clickable.activators.Add(new ManipulatorActivationFilter { button = MouseButton.LeftMouse });
-        confirm.clicked += ChangeHintStatus;
+        confirm.clicked += NoHint;
     }
 
-    public void SetMessageData(Message msg)
+    void NoHint()
     {
-        hint.text = msg.hint.hintLabel;
-    }
-
-    void ChangeHintStatus()
-    {
-        WaitingForHint = false;
+        UserWantsHint = false;
         DisableCurrentHint();
     }
 
-    void DisableCurrentHint()
+    protected virtual void  DisableCurrentHint()
     {
-        hint.clicked -= ChangeHintStatus;
-        confirm.clicked -= ChangeHintStatus;
-        OnHintStatusChange = null;
+        confirm.clicked -= NoHint;
+        OnUserWantsHint = null;
+        OnUserWantsNoHint = null;
     }
 }

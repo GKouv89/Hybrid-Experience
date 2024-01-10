@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/UI/USS/MessageStyleSheet.uss?fileID=7433441132597879392&amp;guid=b2870d838d68d2b4ca55a586f0e4e7cb&amp;type=3#MessageStyleSheet" />
+    <ui:VisualElement name="msgContainer" class="message" style="height: auto;">
+        <ui:VisualElement name="textContainer" class="text">
+            <ui:Label text="Sender Name" display-tooltip-when-elided="true" name="Sender" class="message-sender" style="-unity-text-align: upper-right;" />
+            <ui:Label text="Label" display-tooltip-when-elided="true" name="Body" class="message-body" style="white-space: normal; flex-grow: 1; -unity-text-align: upper-right;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="pfpContainer" class="profilepic-container" style="justify-content: flex-start; width: 15%; height: 100%; align-items: center;">
+            <ui:VisualElement name="pfp" class="profilepic" style="background-image: none; -unity-background-scale-mode: stretch-to-fill; padding-top: 0; left: 0; width: 100px; height: 100px; margin-top: 10%; margin-bottom: 10%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

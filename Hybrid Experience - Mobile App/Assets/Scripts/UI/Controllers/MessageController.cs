@@ -1,6 +1,6 @@
 using UnityEngine.UIElements;
 
-public class MessageController : IUIController
+public class MessageController : IMessageController
 {
     protected Label body;
     public virtual void SetVisualElement(VisualElement elem){
