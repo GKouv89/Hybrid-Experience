@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.fluffsugarbutton.mydialogueapp": "file:C:/Users/RealityLab-Guest/Desktop/Hybrid Experience/Hybrid Experience/com.fluffsugarbutton.mydialogueapp",
     "com.fluffsugarbutton.mymatchmakingsystem": "file:C:/Users/RealityLab-Guest/Desktop/Hybrid Experience/Hybrid Experience/com.fluffsugarbutton.mymatchmakingsystem",
     "com.unity.collab-proxy": "2.0.7",
     "com.unity.feature.2d": "2.0.0",

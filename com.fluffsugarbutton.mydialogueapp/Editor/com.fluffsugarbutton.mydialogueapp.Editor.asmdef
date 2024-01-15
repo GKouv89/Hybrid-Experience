@@ -1,0 +1,16 @@
+{
+    "name": "com.fluffsugarbutton.mydialogueapp.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:aa851d2113e75e44e96dd6854971da9d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
