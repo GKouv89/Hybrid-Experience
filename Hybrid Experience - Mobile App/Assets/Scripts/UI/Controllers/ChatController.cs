@@ -18,8 +18,14 @@ public class ChatController
     ScrollView messageList;
     bool waitingForHint = false; 
     bool isFirstMsg = true;
-    public void Initialize(VisualElement root, Conversation convo, Character me, VisualTreeAsset firstMsgTemplate, VisualTreeAsset plainMsgTemplate, VisualTreeAsset firstMsgRightTemplate, VisualTreeAsset pHintTemplate, VisualTreeAsset hintConfTemplate)
+    bool isActive = true; // if the screen is active, then the character will keep sending messages, if there are messages to send. 
+    // otherwise, if for example we're back to the home screen, this will pause and start again once opening this chat's preview.
+
+    public void Initialize(ChatView view, VisualElement root, Conversation convo, Character me, VisualTreeAsset firstMsgTemplate, VisualTreeAsset plainMsgTemplate, VisualTreeAsset firstMsgRightTemplate, VisualTreeAsset pHintTemplate, VisualTreeAsset hintConfTemplate)
     {
+        view.ChatState += (state) => {
+            isActive = state;
+        };
         var characterName = root.Q<Label>("characterName");
         characterName.text = convo.Sender.charName;
         messageList = root.Q<ScrollView>("messages");
@@ -35,30 +41,32 @@ public class ChatController
 
     public IEnumerator TypeMessages()
     {
-        // IUIController newListEntryLogic;
         TemplateContainer newListEntry;
-
-        while(listEntries.Count > 0){
-            if(!waitingForHint){
-                Message msg = listEntries.Dequeue();
-                if(msg.hasHint)
-                {
-                    waitingForHint = true;
-                    newListEntry = HintQuestion(msg);
-                }
-                else
-                {
-                    if(isFirstMsg){
-                        newListEntry = FirstMessage(msg, sender);
-                        isFirstMsg = false;
-                    }else{
-                        newListEntry = Message( msg);
+            while(listEntries.Count > 0){
+                if(!isActive)
+                    yield return null;
+                else{
+                    if(!waitingForHint){
+                        Message msg = listEntries.Dequeue();
+                        if(msg.hasHint)
+                        {
+                            waitingForHint = true;
+                            newListEntry = HintQuestion(msg);
+                        }
+                        else
+                        {
+                            if(isFirstMsg){
+                                newListEntry = FirstMessage(msg, sender);
+                                isFirstMsg = false;
+                            }else{
+                                newListEntry = Message( msg);
+                            }
+                        }
+                        messageList.Add(newListEntry);
                     }
+                    yield return new WaitForSeconds(1f);
                 }
-                messageList.Add(newListEntry);
             }
-            yield return new WaitForSeconds(1f);
-        }
     }
 
     void WantsHint(Message msg)
@@ -140,5 +148,4 @@ public class ChatController
         SetMessage(ref newListEntry, ref newListEntryLogic, msg);
         return newListEntry;
     }
-    
 }

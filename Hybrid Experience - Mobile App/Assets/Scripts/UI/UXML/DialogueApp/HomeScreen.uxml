@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/UI/USS/MessageStyleSheet.uss?fileID=7433441132597879392&amp;guid=b2870d838d68d2b4ca55a586f0e4e7cb&amp;type=3#MessageStyleSheet" />
+    <ui:VisualElement name="HomeScreen" style="background-color: rgb(89, 89, 89); border-left-color: rgb(89, 89, 89); border-right-color: rgb(89, 89, 89); border-top-color: rgb(89, 89, 89); border-bottom-color: rgb(89, 89, 89); flex-basis: 100%;">
+        <ui:VisualElement name="Header" style="margin-left: 2%; margin-right: 2%; margin-top: 2%; margin-bottom: 2%;">
+            <ui:Label text="Dialogue App" display-tooltip-when-elided="true" name="AppName" enable-rich-text="false" style="color: rgb(255, 255, 255); font-size: 128px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
