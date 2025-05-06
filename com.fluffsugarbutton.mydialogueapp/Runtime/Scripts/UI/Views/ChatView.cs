@@ -35,6 +35,7 @@ namespace DialogueApp
         public event isChatOpenDelegate ChatState;
 
         Button backButton;
+        // void Start()
         void OnEnable()
         {
             var uiDocument = GetComponent<UIDocument>();

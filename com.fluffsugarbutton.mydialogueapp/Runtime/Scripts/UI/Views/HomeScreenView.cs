@@ -14,9 +14,10 @@ namespace DialogueApp
         VisualTreeAsset chatPreviewTemplate;
         [SerializeField]
         List<GameObject> panels; // the panels correspond one to one to the chats.
-        
-        void OnEnable()
+        HomeScreenController controller; 
+        void Start()
         {
+            Debug.Log("HomeScreenView Start");
             uIDocument = GetComponent<UIDocument>();
             // This part is so that the click input from the first person controller's inputsystem will
             // actually manage to go through, and reach the texture on which the ui document is getting rendered.
@@ -43,9 +44,15 @@ namespace DialogueApp
                     return pixelUV;
                 });
             #endif
-            HomeScreenController controller = new();
+            controller = new();
             controller.Initialize(uIDocument.rootVisualElement, chats, panels, chatPreviewTemplate);
             controller.FillHomeScreen();
+        }
+
+        void OnEnable()
+        {
+            Debug.Log("HomeScreenView controller: " + controller);
+            controller?.DebugMe();
         }
     }
 }

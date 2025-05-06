@@ -9,7 +9,7 @@ namespace DialogueApp
     public class FirstMessageController : MessageController
     {
         private VisualElement profilePicture;
-        private Label senderName;
+        public Label senderName;
         public override void SetVisualElement(VisualElement elem)
         {
             base.SetVisualElement(elem);

@@ -12,6 +12,7 @@ namespace DialogueApp
         List<Conversation> chats;
         List<GameObject> panels;
         public void Initialize(VisualElement root, List<Conversation> chats, List<GameObject> panels, VisualTreeAsset chatPreview){
+            Debug.Log("HomeScreenController Initialization");
             this.root = root;
             chatsContainer = root.Q<VisualElement>("HomeScreen");
             chatPreviewTemplate = chatPreview;
@@ -37,12 +38,23 @@ namespace DialogueApp
                 chatsContainer.Add(newListEntry);
                 panelNo++;
             }
+            DebugMe();
         }
 
         void ToggleHomeScreen(bool state)
         {
             Debug.Log("Home screen will " + (state ? "close" : "open"));
             root.style.display = state ? DisplayStyle.None : DisplayStyle.Flex;
+        }
+
+        public void DebugMe()
+        {
+            Debug.Log("HomeScreenController has this many entries: " + chatsContainer.childCount);
+            for(int i = 0; i < chatsContainer.childCount; i++)
+            {
+                Debug.Log(chatsContainer[i].userData);
+                Debug.Log(((FirstMessageController) chatsContainer[i].userData).senderName);
+            }
         }
     }
 }

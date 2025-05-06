@@ -25,6 +25,7 @@ namespace DialogueApp
 
         public void Initialize(ChatView view, VisualElement root, Conversation convo, Character me, VisualTreeAsset firstMsgTemplate, VisualTreeAsset plainMsgTemplate, VisualTreeAsset firstMsgRightTemplate, VisualTreeAsset pHintTemplate, VisualTreeAsset hintConfTemplate)
         {
+            Debug.Log("ChatController Initialization");
             view.ChatState += (state) => {
                 isActive = state;
             };
